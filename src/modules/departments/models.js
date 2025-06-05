@@ -1,0 +1,23 @@
+const mongoose = require('mongoose');
+
+const DepartmentSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    slug: {
+      type: String,
+      lowercase: true,
+    },
+    collegeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'College',
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model('Department', DepartmentSchema);
