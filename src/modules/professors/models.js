@@ -31,6 +31,7 @@ const ProfessorSchema = new mongoose.Schema(
       },
     ],
     personal_website: String,
+    position: String,
   },
   { timestamps: true }
 );

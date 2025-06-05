@@ -7,10 +7,6 @@ const DepartmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    slug: {
-      type: String,
-      lowercase: true,
-    },
     collegeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'College',

@@ -1,5 +1,6 @@
 import eslintPluginPrettier from 'eslint-plugin-prettier';
-import prettierConfig from './.prettierrc.json' assert { type: 'json' }; // optional
+import fs from 'fs';
+const prettierConfig = JSON.parse(fs.readFileSync('./.prettierrc.json', 'utf-8'));
 
 export default [
   {

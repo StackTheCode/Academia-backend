@@ -46,6 +46,9 @@ router.get('/', professorController.getAllProfessors);
  *                 items:
  *                   type: string
  *                 example: ["machine learning", "AI"]
+ *               position:
+ *                 type: string
+ *                 example: Head of Department
  *     responses:
  *       201:
  *         description: Professor created successfully
@@ -107,6 +110,8 @@ router.get('/:id', professorController.getProfessorById);
  *                 type: array
  *                 items:
  *                   type: string
+ *               position:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Professor updated successfully

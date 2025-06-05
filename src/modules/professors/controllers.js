@@ -5,7 +5,8 @@ exports.getAllProfessors = async (req, res) => {
     const professors = await professorService.getAllProfessors();
     res.json(professors);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch professors' });
+    console.log(`${err}`);
+    res.status(500).json({ error: 'Failed to fetch professors: ${err}' });
   }
 };
 

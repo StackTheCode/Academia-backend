@@ -8,7 +8,7 @@ const userController = require('./controllers');
  *   get:
  *     summary: Get all users
  *     tags:
- *       - Professors
+ *       - Users
  *     responses:
  *       200:
  *         description: Successfully retrieved users

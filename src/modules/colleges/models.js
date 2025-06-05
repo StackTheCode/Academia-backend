@@ -8,11 +8,6 @@ const CollegeSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    slug: {
-      type: String,
-      unique: true,
-      lowercase: true,
-    },
   },
   { timestamps: true }
 );
