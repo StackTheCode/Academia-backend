@@ -8,6 +8,13 @@ const CollegeSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    departments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department',
+        required: true,
+      },
+    ],
   },
   { timestamps: true }
 );

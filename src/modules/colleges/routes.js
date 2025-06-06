@@ -35,6 +35,11 @@ router.get('/', collegeController.getAllColleges);
  *               location:
  *                 type: string
  *                 example: Mumbai
+ *               departments:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["68430b1bcfe0f5ce1fd9c87b", "68430b1bcfe0f5ce1fd9c87b"]
  *     responses:
  *       201:
  *         description: College created successfully
@@ -88,6 +93,10 @@ router.get('/:id', collegeController.getCollegeById);
  *                 type: string
  *               location:
  *                 type: string
+ *               departments:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     responses:
  *       200:
  *         description: College updated successfully

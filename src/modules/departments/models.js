@@ -7,11 +7,6 @@ const DepartmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    collegeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'College',
-      required: true,
-    },
   },
   { timestamps: true }
 );
