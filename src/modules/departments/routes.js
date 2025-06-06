@@ -32,9 +32,6 @@ router.get('/', departmentController.getAllDepartments);
  *               name:
  *                 type: string
  *                 example: Computer Science and Engineering
- *               collegeId:
- *                 type: string
- *                 example: 645a23b9d1f8c2a1f1a23bc5
  *     responses:
  *       201:
  *         description: Department created successfully
@@ -85,8 +82,6 @@ router.get('/:id', departmentController.getDepartmentById);
  *             type: object
  *             properties:
  *               name:
- *                 type: string
- *               collegeId:
  *                 type: string
  *     responses:
  *       200:
