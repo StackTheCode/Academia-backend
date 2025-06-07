@@ -19,7 +19,7 @@ services:
     - academia-backend-services
     restart: always
     ports:
-      - "8081:8081"
+      - "${ME_PORT}:${ME_PORT}"
     env_file:
       - .env
     environment:
@@ -36,7 +36,7 @@ services:
     networks:
       - academia-backend-services
     ports: 
-      - "27017:27017"
+      - "${MONGO_PORT}:${MONGO_PORT}"
     volumes:
       - mongo-data:/data/db
     env_file:
