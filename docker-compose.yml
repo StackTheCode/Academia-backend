@@ -1,0 +1,56 @@
+services:
+  server:
+    networks:
+      - academia-backend-services
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    restart: always
+    volumes:
+      - .:/app/:rw
+    depends_on: 
+      - mongo
+  
+  mongo-express:
+    image: mongo-express:latest
+    networks:
+    - academia-backend-services
+    restart: always
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=${ME_USER}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_PASSWORD}
+      - ME_CONFIG_MONGODB_URL=${MONGO_URI}
+      - PORT=${ME_PORT}
+    depends_on:
+      - mongo
+    
+
+  mongo:
+    image: mongo:latest
+    networks:
+      - academia-backend-services
+    ports: 
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    restart: always
+
+volumes:
+  mongo-data:
+    external: false
+
+networks:
+  academia-backend-services:
+    external: false
