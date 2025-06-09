@@ -1,26 +1,26 @@
-const User = require('./models');
+const GoogleUser = require('./models');
 
 // Fetch all users
 exports.getAllUsers = async () => {
-  return await User.find();
+  return await GoogleUser.find();
 };
 
 // Create a user
 exports.createUser = async (userData) => {
-  return await User.create(userData);
+  return await GoogleUser.create(userData);
 };
 
 // Find user by ID
 exports.getUserById = async (id) => {
-  return await User.findById(id);
+  return await GoogleUser.findById(id);
 };
 
 // Update user
 exports.updateUser = async (id, data) => {
-  return await User.findByIdAndUpdate(id, data, { new: true });
+  return await GoogleUser.findByIdAndUpdate(id, data, { new: true });
 };
 
 // Delete user
 exports.deleteUser = async (id) => {
-  return await User.findByIdAndDelete(id);
+  return await GoogleUser.findByIdAndDelete(id);
 };
