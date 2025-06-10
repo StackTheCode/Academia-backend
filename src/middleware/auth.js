@@ -1,14 +1,16 @@
+const { PORT } = require('../config/env');
+
 module.exports = {
   ensureAuth: function (req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     } else {
-      res.redirect('http://localhost:8000');
+      res.redirect(`http://localhost:${PORT}`);
     }
   },
   ensureGuest: function (req, res, next) {
     if (req.isAuthenticated()) {
-      res.redirect('http://localhost:8000/dashboard');
+      res.redirect(`http://localhost:${PORT}/dashboard`);
     } else {
       return next();
     }

@@ -1,7 +1,7 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const GoogleUser = require('../modules/users/models');
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./env');
+const { PORT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./env');
 
 module.exports = function (passport) {
   passport.use(
@@ -9,7 +9,7 @@ module.exports = function (passport) {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:8000/api/auth/google/callback',
+        callbackURL: `http://localhost:${PORT}/api/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {

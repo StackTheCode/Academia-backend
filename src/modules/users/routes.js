@@ -1,33 +1,69 @@
 const { resolve } = require('bluebird');
 const express = require('express');
+const { PORT } = require('../../config/env');
 const passport = require('passport');
 const router = express.Router();
 const userController = require('./controllers');
 
+/**
+ * @swagger
+ * /api/auth/google:
+ *   get:
+ *     summary: Initiate Google OAuth authentication
+ *     tags:
+ *       - Authentication
+ *     responses:
+ *       302:
+ *         description: Redirects the user to Google's OAuth consent screen
+ */
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 
+/**
+ * @swagger
+ * /api/auth/google/callback:
+ *   get:
+ *     summary: Handle Google OAuth callback
+ *     tags:
+ *       - Authentication
+ *     responses:
+ *       302:
+ *         description: Redirects to dashboard on successful authentication or to home on failure
+ *       401:
+ *         description: Unauthorized – Google authentication failed
+ */
 router.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/',
   }),
   (req, res) => {
-    res.redirect('http://localhost:8000/dashboard');
+    res.redirect(`http://localhost:${PORT}/dashboard`);
   }
 );
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   get:
+ *     summary: Logout the user
+ *     tags:
+ *       - Authentication
+ *     responses:
+ *       302:
+ *         description: Redirects to homepage after logging out
+ */
 router.get('/logout', (req, res) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect('http://localhost:8000');
+    res.redirect(`http://localhost:${PORT}`);
   });
 });
 
 /**
  * @swagger
- * /api/users:
+ * /api/auth:
  *   get:
  *     summary: Get all users
  *     tags:
@@ -37,10 +73,9 @@ router.get('/logout', (req, res) => {
  *         description: Successfully retrieved users
  */
 router.get('/', userController.getAllUsers);
-
 /**
  * @swagger
- * /api/users:
+ * /api/auth:
  *   post:
  *     summary: Create a new user
  *     tags:
@@ -51,10 +86,15 @@ router.get('/', userController.getAllUsers);
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - googleId
+ *               - displayName
  *             properties:
- *               name:
+ *               googleId:
  *                 type: string
- *               email:
+ *               displayName:
+ *                 type: string
+ *               image:
  *                 type: string
  *     responses:
  *       201:
@@ -64,7 +104,7 @@ router.post('/', userController.createUser);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/auth/{id}:
  *   get:
  *     summary: Get a user by ID
  *     tags:
@@ -86,7 +126,7 @@ router.get('/:id', userController.getUserById);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/auth/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags:
@@ -105,19 +145,23 @@ router.get('/:id', userController.getUserById);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               googleId:
  *                 type: string
- *               email:
+ *               displayName:
+ *                 type: string
+ *               image:
  *                 type: string
  *     responses:
  *       200:
  *         description: User updated successfully
+ *       404:
+ *         description: User not found
  */
 router.put('/:id', userController.updateUser);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/auth/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags:
@@ -132,6 +176,8 @@ router.put('/:id', userController.updateUser);
  *     responses:
  *       200:
  *         description: User deleted successfully
+ *       404:
+ *         description: User not found
  */
 router.delete('/:id', userController.deleteUser);
 
