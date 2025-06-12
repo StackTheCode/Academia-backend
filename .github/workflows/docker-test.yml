@@ -1,0 +1,39 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Load Secrets to ENV File
+      run: |
+        touch .env
+        echo "${{ secrets.TEST_SECRETS }}" >> .env
+
+    - name: Check ENV File 
+      uses: falti/dotenv-action@v1
+
+    - name: Read ENV File
+      run: |
+        cat .env
+
+    - name: Build the Docker Image
+      run: docker compose up --build -d
+
+    - name: Test MongoDB Connection
+      run: docker compose exec -T mongo mongosh --eval "db.adminCommand('ping')"
