@@ -6,9 +6,20 @@ const professorController = require('./controllers');
  * @swagger
  * /api/professors:
  *   get:
- *     summary: Get all professors
+ *     summary: Get all professors, optionally filtered by collegeId and departmentId
  *     tags:
  *       - Professors
+ *     parameters:
+ *       - in: query
+ *         name: collegeId
+ *         schema:
+ *           type: string
+ *         description: Filter professors by college ID
+ *       - in: query
+ *         name: departmentId
+ *         schema:
+ *           type: string
+ *         description: Filter professors by department ID
  *     responses:
  *       200:
  *         description: Successfully retrieved professors

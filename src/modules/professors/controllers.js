@@ -2,7 +2,9 @@ const professorService = require('./services');
 
 exports.getAllProfessors = async (req, res) => {
   try {
-    const professors = await professorService.getAllProfessors();
+    const { collegeId, departmentId } = req.query;
+    console.log(departmentId);
+    const professors = await professorService.getAllProfessors({ collegeId, departmentId });
     res.json(professors);
   } catch (err) {
     console.log(`${err}`);
