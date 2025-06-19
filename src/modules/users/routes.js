@@ -1,12 +1,14 @@
 const { resolve } = require('bluebird');
 const express = require('express');
-const { PORT } = require('../../config/env');
+const { PORT, JWT_SECRET, FRONTEND_URI } = require('../../config/env');
 const passport = require('passport');
 const router = express.Router();
 const userController = require('./controllers');
+const authenticateJWT = require('../../middleware/auth'); // <--- Add this
+const jwt = require('jsonwebtoken');
 
 /**
- * @swagger
+ * @swaggeruse
  * /api/auth/google:
  *   get:
  *     summary: Initiate Google OAuth authentication
@@ -16,7 +18,7 @@ const userController = require('./controllers');
  *       302:
  *         description: Redirects the user to Google's OAuth consent screen
  */
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/google', passport.authenticate('google', { session: false, scope: ['profile'] }));
 
 /**
  * @swagger
@@ -34,10 +36,16 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    failureRedirect: '/',
+    failureRedirect: `${FRONTEND_URI}`,
+    session: false,
   }),
   (req, res) => {
-    res.redirect(`http://localhost:${PORT}/dashboard`);
+    const token = jwt.sign({ id: req.user.id, googleId: req.user.googleId }, JWT_SECRET, {
+      expiresIn: '1h',
+    });
+
+    // Send token to frontend via redirect URL
+    res.redirect(`${FRONTEND_URI}/dashboard?token=${token}`);
   }
 );
 
@@ -53,12 +61,12 @@ router.get(
  *         description: Redirects to homepage after logging out
  */
 router.get('/logout', (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect(`http://localhost:${PORT}`);
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: false, // set true in production with HTTPS
+    sameSite: 'Lax', // or 'Strict'/'None' based on frontend/backend setup
   });
+  res.status(200).json({ message: 'Logged out successfully' });
 });
 
 /**
@@ -157,7 +165,7 @@ router.get('/:id', userController.getUserById);
  *       404:
  *         description: User not found
  */
-router.put('/:id', userController.updateUser);
+router.put('/:id', authenticateJWT, userController.updateUser);
 
 /**
  * @swagger
@@ -179,6 +187,6 @@ router.put('/:id', userController.updateUser);
  *       404:
  *         description: User not found
  */
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', authenticateJWT, userController.deleteUser);
 
 module.exports = router;
