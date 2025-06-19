@@ -1,4 +1,4 @@
-require('dotenv').config(); // This loads .env from the root by default
+require('dotenv').config();
 
 module.exports = {
   PORT: process.env.PORT,

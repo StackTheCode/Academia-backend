@@ -2,3 +2,5 @@ node_modules
 .env
 logs
 /src/crawlers/IIT_Madras/logs/
+mongo-keyfile
+data

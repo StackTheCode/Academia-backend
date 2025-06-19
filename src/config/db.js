@@ -1,3 +1,4 @@
+// src/config/db.js
 const mongoose = require('mongoose');
 const { MONGO_URI, NODE_ENV } = require('./env');
 const bluebird = require('bluebird');
@@ -14,7 +15,7 @@ if (NODE_ENV === 'DEV') {
   mongoose.set('debug', true);
 }
 
-exports.connect = () => {
-  mongoose.connect(MONGO_URI, {}).then(() => logger.info(`MongoDB Connection Established`));
-  return mongoose.connection;
+exports.connect = async () => {
+  await mongoose.connect(MONGO_URI, {});
+  logger.info(`✅ MongoDB Connection Established`);
 };

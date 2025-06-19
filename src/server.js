@@ -2,22 +2,25 @@
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
-const cookieParser = require('cookie-parser'); // <-- ADD THIS
+const cookieParser = require('cookie-parser');
 const { connect } = require('./config/db');
 const { PORT, NODE_ENV } = require('./config/env');
 const logger = require('./config/logger');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+const startProfessorChangeStream = require('./utils/typesense');
+const initTypesenseSchema = require('../scripts/init-typesense'); // ← add this
+const initSynonyms = require('./utils/synonyms');
 
 require('./config/passport')(passport);
-connect();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // your frontend port
+    origin: 'http://localhost:5173', // Frontend origin
     credentials: true,
   })
 );
@@ -28,9 +31,28 @@ if (NODE_ENV === 'DEV') {
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 }
 
+// Routes
 app.use('/api/colleges', require('./modules/colleges/routes'));
 app.use('/api/departments', require('./modules/departments/routes'));
 app.use('/api/professors', require('./modules/professors/routes'));
 app.use('/api/auth', require('./modules/users/routes'));
 
-app.listen(PORT, () => logger.info(`Server Start at ${PORT}`));
+// Start server after DB + Typesense are ready
+connect()
+  .then(async () => {
+    logger.info('✅ MongoDB connected');
+
+    // Initialize Typesense schema only if it doesn’t exist
+    await initTypesenseSchema();
+    await initSynonyms(); // <- right after schema
+
+    // Start listening for changes in MongoDB
+    startProfessorChangeStream();
+
+    // Start Express server
+    app.listen(PORT, () => logger.info(`🚀 Server started on port ${PORT}`));
+  })
+  .catch((err) => {
+    logger.error('❌ Failed to start server:', err.message || err);
+    process.exit(1);
+  });
