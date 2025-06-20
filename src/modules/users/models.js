@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  uploadedFiles: {
+    type: [String],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model('GoogleUser', UserSchema);

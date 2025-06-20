@@ -17,4 +17,8 @@ module.exports = {
   FRONTEND_URI: process.env.FRONTEND_URI,
   TYPESENSE_HOST: process.env.TYPESENSE_HOST,
   TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
+  BUCKET_NAME: process.env.BUCKET_NAME,
+  BUCKET_REGION: process.env.BUCKET_REGION,
+  ACCESS_KEY: process.env.ACCESS_KEY,
+  SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
 };
