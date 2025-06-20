@@ -8,8 +8,9 @@ Backend for Academia, a database of various professors in and around the world. 
 - ExpressJS
 - MongoDB
 - Swagger
+- Typesense
 
-## Setup
+## Local Setup
 
 ### Install the node modules
 
@@ -26,3 +27,17 @@ Backend for Academia, a database of various professors in and around the world. 
 ## Note:
 
 To access the swagger documentation, set NODE_ENV=DEV and check localhost:{PORT}/api-docs in your browser
+
+## Docker Setup
+
+### Give permission to replica init
+`chmod +x ./scripts/init-replica.sh`
+
+### Generate a mongo key file using openssl
+`openssl rand -base64 756 > mongo-keyfile`
+
+### Give proper permission to key file
+`chmod 400 mongo-keyfile`
+
+### Start Docker 
+docker compose up
