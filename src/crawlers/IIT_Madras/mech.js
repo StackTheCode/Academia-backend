@@ -82,6 +82,22 @@ async function scrapeProfilesMech() {
             .join('; ');
         }
 
+        // Biography (if no research area)
+        if (researchInterests == 'Unavailable') {
+          const biographyHeader = $('button span')
+            .filter((_, el) => $(el).text().trim().toLowerCase().includes('biography'))
+            .closest('button');
+
+          if (biographyHeader.length) {
+            const parent = biographyHeader.closest('.accordion-item');
+            researchInterests = parent
+              .find('.accordion-body li')
+              .map((_, el) => $(el).text().trim())
+              .get()
+              .join('; ');
+          }
+        }
+
         return {
           name,
           designation,
