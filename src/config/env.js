@@ -15,4 +15,6 @@ module.exports = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   JWT_SECRET: process.env.JWT_SECRET,
   FRONTEND_URI: process.env.FRONTEND_URI,
+  TYPESENSE_HOST: process.env.TYPESENSE_HOST,
+  TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
 };

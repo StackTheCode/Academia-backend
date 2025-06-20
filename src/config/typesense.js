@@ -1,14 +1,15 @@
 const Typesense = require('typesense');
+const { TYPESENSE_HOST, TYPESENSE_API_KEY } = require('./env');
 
 const typesense = new Typesense.Client({
   nodes: [
     {
-      host: 'typesense',
+      host: TYPESENSE_HOST,
       port: 8108,
       protocol: 'http',
     },
   ],
-  apiKey: 'xyz',
+  apiKey: TYPESENSE_API_KEY,
   connectionTimeoutSeconds: 2,
 });
 

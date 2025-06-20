@@ -1,4 +1,3 @@
-// src/server.js
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
@@ -8,9 +7,12 @@ const { PORT, NODE_ENV } = require('./config/env');
 const logger = require('./config/logger');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
-const startProfessorChangeStream = require('./utils/typesense');
 const initTypesenseSchema = require('../scripts/init-typesense'); // ← add this
-const initSynonyms = require('./utils/synonyms');
+const {
+  startProfessorChangeStream,
+  startSynonymChangeStream,
+  initSynonyms,
+} = require('./utils/typesense');
 
 require('./config/passport')(passport);
 
@@ -36,6 +38,7 @@ app.use('/api/colleges', require('./modules/colleges/routes'));
 app.use('/api/departments', require('./modules/departments/routes'));
 app.use('/api/professors', require('./modules/professors/routes'));
 app.use('/api/auth', require('./modules/users/routes'));
+app.use('/api/synonyms', require('./modules/synonyms/routes'));
 
 // Start server after DB + Typesense are ready
 connect()
@@ -48,6 +51,7 @@ connect()
 
     // Start listening for changes in MongoDB
     startProfessorChangeStream();
+    startSynonymChangeStream();
 
     // Start Express server
     app.listen(PORT, () => logger.info(`🚀 Server started on port ${PORT}`));
