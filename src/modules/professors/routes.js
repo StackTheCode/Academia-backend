@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const professorController = require('./controllers');
+const Professor = require('./models');
+const typesenseClient = require('../../config/typesense');
 
 /**
  * @swagger
  * /api/professors:
  *   get:
- *     summary: Get all professors, optionally filtered by collegeId and departmentId
+ *     summary: Get all professors, optionally filtered by collegeId, departmentId, and research interest
  *     tags:
  *       - Professors
  *     parameters:
@@ -20,6 +22,11 @@ const professorController = require('./controllers');
  *         schema:
  *           type: string
  *         description: Filter professors by department ID
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         description: Fuzzy search professors by research interest (e.g., "cybersecurity")
  *     responses:
  *       200:
  *         description: Successfully retrieved professors
@@ -148,5 +155,59 @@ router.put('/:id', professorController.updateProfessor);
  *         description: Professor deleted successfully
  */
 router.delete('/:id', professorController.deleteProfessor);
+
+/**
+ * @swagger
+ * /api/professors/resync:
+ *   post:
+ *     summary: Resync all professors from MongoDB to Typesense
+ *     tags:
+ *       - Professors
+ *     description: This endpoint fetches all professors from MongoDB and upserts them into the Typesense collection.
+ *     responses:
+ *       200:
+ *         description: All professors resynced successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Resync complete.
+ *       500:
+ *         description: Server error while syncing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Internal server error
+ */
+router.post('/resync', async (req, res) => {
+  try {
+    const professors = await Professor.find();
+    for (const doc of professors) {
+      await typesenseClient
+        .collections('professors')
+        .documents()
+        .upsert({
+          id: doc._id.toString(),
+          name: doc.name,
+          email: doc.email,
+          collegeId: doc.collegeId.toString(),
+          departmentId: doc.departmentId.toString(),
+          researchInterests: doc.researchInterests,
+          position: doc.position || '',
+          personal_website: doc.personal_website || '',
+        });
+    }
+    res.status(200).json({ message: 'Resync complete.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;
