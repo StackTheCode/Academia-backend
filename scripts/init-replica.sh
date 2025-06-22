@@ -1,30 +1,17 @@
 #!/bin/bash
 
-m1=mongo
-port=${MONGO_PORT:-27017}
-
-echo "⏳ Waiting for ${m1}:${port} to be ready..."
-
-until mongosh --host ${m1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
-  printf '.'
-  sleep 1
+echo "⏳ Waiting for MongoDB to be ready..."
+until mongosh --host mongo --port ${MONGO_PORT} -u ${MONGO_USER} -p ${MONGO_PASSWORD} --authenticationDatabase admin --eval 'db.adminCommand("ping")' &>/dev/null; do
+  sleep 2
 done
 
-echo -e "\n✅ MongoDB is up, initializing replica set..."
+echo "✅ Connected to MongoDB. Initiating replica set..."
 
-mongosh --host ${m1}:${port} <<EOF
-var rootUser = '${MONGO_USER}';
-var rootPassword = '${MONGO_PASSWORD}';
-var admin = db.getSiblingDB('admin');
-admin.auth(rootUser, rootPassword);
-
-var config = {
-    "_id": "rs0",
-    "members": [
-        { "_id": 0, "host": "${m1}:${port}", "priority": 1 }
-    ]
-};
-rs.initiate(config);
+mongosh --host mongo --port ${MONGO_PORT} -u ${MONGO_USER} -p ${MONGO_PASSWORD} --authenticationDatabase admin <<EOF
+rs.initiate({
+  _id: "rs0",
+  members: [{ _id: 0, host: "mongo:${MONGO_PORT}" }]
+})
 EOF
 
-echo "Replica set initiated."
+echo "✅ Replica set initiated."

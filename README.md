@@ -30,14 +30,11 @@ To access the swagger documentation, set NODE_ENV=DEV and check localhost:{PORT}
 
 ## Docker Setup
 
-### Give permission to replica init
-`chmod +x ./scripts/init-replica.sh`
-
-### Generate a mongo key file using openssl
-`openssl rand -base64 756 > mongo-keyfile`
-
-### Give proper permission to key file
-`chmod 400 mongo-keyfile`
+### Give permission to the keyfile script and execute
+`
+chmod +x keyfile.sh
+./keyfile.sh
+`
 
 ### Start Docker 
 docker compose up
