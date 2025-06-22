@@ -14,40 +14,36 @@ services:
       - mongo
 
   mongo:
-    image: mongo:latest
-    restart: always
+    image: mongo:8.0
+    container_name: mongo
     ports:
       - "${MONGO_PORT}:${MONGO_PORT}"
     volumes:
       - mongo-data:/data/db
-      - ./mongo-keyfile:/etc/mongo-keyfile:ro
-    env_file:
-      - .env
+      - ./mongo-keyfile:/etc/mongo-keyfile  # remove :ro so we can copy
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_DB}
-    # command: [
-    #   "--replSet", "rs0",
-    #   "--bind_ip_all",
-    #   "--keyFile", "/etc/mongo-keyfile"
-    # ]
-    command: [
-      "bash", "-c",
-      "cp /etc/mongo-keyfile /tmp/keyfile && chmod 400 /tmp/keyfile && exec mongod --replSet rs0 --bind_ip_all --keyFile /tmp/keyfile"
-    ]
+    command: ["mongod", "--replSet", "rs0", "--keyFile", "/etc/mongo-keyfile"]
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --host 127.0.0.1 --eval 'db.adminCommand(\"ping\")' || exit 1"]
+      interval: 5s
+      timeout: 30s
+      retries: 30
     networks:
       - academia-backend-services
 
   mongo-init:
-    image: mongo:latest
+    image: mongo:8.0
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     volumes:
-      - ./scripts/init-replica.sh:/init-replica.sh
+      - ./scripts/init-replica.sh:/init-replica.sh:ro
     env_file:
       - .env
-    entrypoint: ["bash", "/init-replica.sh"]
+    entrypoint: ["/bin/bash", "/init-replica.sh"]
     networks:
       - academia-backend-services
 
