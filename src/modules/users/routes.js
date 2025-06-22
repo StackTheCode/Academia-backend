@@ -332,7 +332,7 @@ router.get('/files/get-one/:file', authenticateJWT, userController.getFile);
 
 /**
  * @swagger
- * /api/auth/files/delete/{file}:
+ * /api/auth/files/delete/{filename}:
  *   delete:
  *     summary: Delete a file from S3 and remove its reference from the user's profile
  *     tags:
