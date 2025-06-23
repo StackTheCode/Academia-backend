@@ -85,6 +85,25 @@ async function scrapeProfilesEE() {
           }
         });
 
+        if (researchInterests === 'Unavailable') {
+          $('div.accordion-item').each((_, item) => {
+            const heading = $(item).find('button.accordion-button span').text().toLowerCase();
+            const contentDiv = $(item).find('div.accordion-body');
+
+            if (heading.includes('about')) {
+              const aboutText = contentDiv
+                .text()
+                .replace(/\s+/g, ' ')
+                .trim()
+                .replace(/\s*\.\s*$/, '');
+              if (aboutText) {
+                researchInterests = aboutText;
+              }
+              return false; // break the loop
+            }
+          });
+        }
+
         return {
           name,
           designation,
