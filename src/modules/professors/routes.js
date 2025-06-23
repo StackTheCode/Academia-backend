@@ -27,9 +27,41 @@ const typesenseClient = require('../../config/typesense');
  *         schema:
  *           type: string
  *         description: Fuzzy search professors by research interest (e.g., "cybersecurity")
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *           minimum: 1
+ *         description: Page number for paginated results
+ *       - in: query
+ *         name: per_page
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *           minimum: 1
+ *         description: Number of professors per page
  *     responses:
  *       200:
  *         description: Successfully retrieved professors
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 professors:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Professor'
+ *                 total:
+ *                   type: integer
+ *                   description: Total number of matching professors
+ *                 page:
+ *                   type: integer
+ *                   description: Current page number
+ *                 per_page:
+ *                   type: integer
+ *                   description: Number of results per page
  */
 router.get('/', professorController.getAllProfessors);
 
