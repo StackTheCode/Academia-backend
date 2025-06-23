@@ -31,10 +31,10 @@ To access the swagger documentation, set NODE_ENV=DEV and check localhost:{PORT}
 ## Docker Setup
 
 ### Give permission to the keyfile script and execute
-`
+```
 chmod +x keyfile.sh
 ./keyfile.sh
-`
+```
 
 ### Start Docker 
 `docker compose up`
