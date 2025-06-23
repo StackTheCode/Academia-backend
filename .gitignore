@@ -4,3 +4,5 @@ logs
 /src/crawlers/IIT_Madras/logs/
 /src/crawlers/logs/
 random
+mongo-keyfile
+data
