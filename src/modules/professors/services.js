@@ -6,12 +6,16 @@ exports.getAllProfessors = async (filters) => {
   if (filters.departmentId) filterParts.push(`departmentId:=${filters.departmentId}`);
   if (filters.collegeId) filterParts.push(`collegeId:=${filters.collegeId}`);
   const filter_by = filterParts.join(' && ');
-  const query_by = filters.q ? 'researchInterests' : 'name'; // fallback is required
+  const page = filters.page || 1;
+  const per_page = filters.per_page || 10;
+  const query_by = filters.q ? 'researchInterests' : 'name';
 
   const searchOptions = {
     q: filters.q || '*',
     query_by,
     ...(filter_by && { filter_by }),
+    page,
+    per_page,
   };
 
   try {
@@ -21,21 +25,23 @@ exports.getAllProfessors = async (filters) => {
       .search(searchOptions);
 
     const ids = searchResult.hits.map((hit) => hit.document.id);
-
-    // Get full documents from MongoDB
     const professors = await Professor.find({ _id: { $in: ids } }).populate(
       'collegeId departmentId'
     );
 
-    // Preserve Typesense hit order
     const ordered = ids
       .map((id) => professors.find((prof) => prof._id.toString() === id))
       .filter(Boolean);
 
-    return ordered;
+    return {
+      professors: ordered,
+      total: searchResult.found,
+      page,
+      per_page,
+    };
   } catch (err) {
     console.error('❌ Typesense search failed:', err.message);
-    return [];
+    return { professors: [], total: 0, page, per_page };
   }
 };
 

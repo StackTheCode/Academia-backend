@@ -2,13 +2,15 @@ const professorService = require('./services');
 
 exports.getAllProfessors = async (req, res) => {
   try {
-    const { collegeId, departmentId, q } = req.query;
-    const professors = await professorService.getAllProfessors({
+    const { collegeId, departmentId, q, page = 1, per_page = 10 } = req.query;
+    const result = await professorService.getAllProfessors({
       collegeId,
       departmentId,
       q,
+      page: parseInt(page),
+      per_page: parseInt(per_page),
     });
-    res.json(professors);
+    res.json(result);
   } catch (err) {
     console.log(`${err}`);
     res.status(500).json({ error: 'Failed to fetch professors: ${err}' });
