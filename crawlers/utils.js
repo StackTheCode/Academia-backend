@@ -1,9 +1,9 @@
-require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
-const logger = require('../config/logger');
-const collegeService = require('../modules/colleges/services');
-const departmentsService = require('../modules/departments/services');
+const logger = require('../src/config/logger');
+const collegeService = require('../src/modules/colleges/services');
+const departmentsService = require('../src/modules/departments/services');
 
 async function mongoose_connection_open() {
   const MONGO_URI = process.env.MONGO_URI_LOCALHOST;
