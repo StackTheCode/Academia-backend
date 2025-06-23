@@ -1,7 +1,7 @@
-const professorsService = require('../modules/professors/services');
-const departmentsService = require('../modules/departments/services');
+const professorsService = require('../src/modules/professors/services');
+const departmentsService = require('../src/modules/departments/services');
 const utils = require('./utils');
-const logger = require('../config/logger');
+const logger = require('../src/config/logger');
 const tags = require('./tags.json');
 
 // Tag matching for research interests

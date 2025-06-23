@@ -1,9 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const collegeService = require('../../modules/colleges/services');
-const professorsService = require('../../modules/professors/services');
+const collegeService = require('../../src/modules/colleges/services');
+const professorsService = require('../../src/modules/professors/services');
 const utils = require('../utils');
-const logger = require('../../config/logger');
+const logger = require('../../src/config/logger');
 
 const baseUrl = 'https://www.ee.iitm.ac.in/faculty/';
 async function scrapeProfilesEE() {
@@ -125,6 +125,7 @@ async function scrapeProfilesEE() {
         results.push(details);
       }
     }
+    logger.info(`Number of professors: ${results.length}`);
     return results;
   } catch (err) {
     logger.error('Error fetching page:', err.message);
