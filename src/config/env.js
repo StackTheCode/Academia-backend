@@ -21,4 +21,6 @@ module.exports = {
   BUCKET_REGION: process.env.BUCKET_REGION,
   ACCESS_KEY: process.env.ACCESS_KEY,
   SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
+  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_HOST: process.env.REDIS_HOST,
 };

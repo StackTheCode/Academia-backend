@@ -12,6 +12,7 @@ services:
       - academia-backend-services
     depends_on:
       - mongo
+      - redis-cache
 
   mongo:
     image: mongo:8.0
@@ -76,9 +77,24 @@ services:
       - ./data:/data
     networks:
       - academia-backend-services
+  
+  redis-cache:
+    image: redis:7.0
+    container_name: redis-cache
+    env_file:
+      - .env
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - academia-backend-services 
+    volumes:
+      - redis-data:/data
+    command: redis-server
 
 volumes:
   mongo-data:
+    external: false
+  redis-data:
     external: false
 
 networks:

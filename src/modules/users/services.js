@@ -18,6 +18,8 @@ const s3 = new S3Client({
   region: BUCKET_REGION,
 });
 
+const redis = require('../../config/redis');
+
 // Fetch all users
 exports.getAllUsers = async () => {
   return await GoogleUser.find();
@@ -82,13 +84,22 @@ exports.getFile = async (file, googleId) => {
     throw new Error('File not found');
   }
 
+  const cacheKey = `fileUrl:${file}`;
+  const cachedUrl = await redis.get(cacheKey);
+
+  if (cachedUrl) {
+    console.log('Already Present');
+    return cachedUrl;
+  }
+
   const params = {
     Bucket: BUCKET_NAME,
     Key: file,
   };
   const command = new GetObjectCommand(params);
-
-  return (fileUrl = await getSignedUrl(s3, command, { expiresIn: 3600 }));
+  fileUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  await redis.set(cacheKey, fileUrl, 'EX', 3600);
+  return fileUrl;
 };
 
 exports.deleteFile = async (file, googleId) => {
@@ -111,4 +122,12 @@ exports.deleteFile = async (file, googleId) => {
 
   user.uploadedFiles = user.uploadedFiles.filter((f) => f !== file);
   await user.save();
+
+  const cacheKey = `fileUrl:${file}`;
+  const cachedUrl = await redis.get(cacheKey);
+
+  if (cachedUrl) {
+    await redis.del(cacheKey);
+    console.log('Deleted file from cache');
+  }
 };
