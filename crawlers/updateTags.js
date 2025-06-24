@@ -24,7 +24,11 @@ function getTagsForDepartment(departmentName) {
 
 async function updateAllProfessorsWithTags() {
   try {
-    const professors = await professorsService.getAllProfessors({});
+    const { professors } = await professorsService.getAllProfessors({
+      per_page: 250,
+      page: 1,
+      q: '*',
+    });
 
     for (const professor of professors) {
       const department = await departmentsService.getDepartmentById(professor.departmentId);
