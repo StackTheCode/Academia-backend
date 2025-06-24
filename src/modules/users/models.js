@@ -1,16 +1,34 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  googleId: {
+  authType: {
     type: String,
     required: true,
+    enum: ['google', 'local'],
+    default: 'local',
+  },
+  googleId: {
+    type: String,
   },
   displayName: {
     type: String,
     required: true,
   },
-  image: {
+  email: {
     type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    select: false,
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'user'],
+    default: 'user',
   },
   createdAt: {
     type: Date,
@@ -22,4 +40,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('GoogleUser', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

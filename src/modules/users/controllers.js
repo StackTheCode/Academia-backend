@@ -11,16 +11,6 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// POST /api/auth
-exports.createUser = async (req, res) => {
-  try {
-    const user = await userService.createUser(req.body);
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
 // GET /api/auth/:id
 exports.getUserById = async (req, res) => {
   try {
@@ -57,9 +47,8 @@ exports.deleteUser = async (req, res) => {
 // GET /api/auth/files
 exports.getAllFiles = async (req, res) => {
   try {
-    const googleId = req.user.googleId;
-    const uploadedFiles = await userService.getAllFiles(googleId);
-
+    console.log(req.user._id);
+    const uploadedFiles = await userService.getAllFiles(req.user._id);
     return res.status(200).json({ uploadedFiles });
   } catch (err) {
     if (err.message === 'User not found') {
@@ -77,8 +66,8 @@ exports.createFile = async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    const fileUrl = await userService.createFile(req.file, req.user.googleId);
-    res.status(201).json({ message: 'File uploaded successfully', url: fileUrl });
+    await userService.createFile(req.file, req.user._id);
+    res.status(201).json({ message: 'File uploaded successfully' });
   } catch (err) {
     console.error('Upload error:', err);
     res.status(500).json({ error: 'Internal server error' });
@@ -88,7 +77,7 @@ exports.createFile = async (req, res) => {
 // GET /api/auth/files/get-one/:file
 exports.getFile = async (req, res) => {
   try {
-    const fileUrl = await userService.getFile(req.params.file, req.user.googleId);
+    const fileUrl = await userService.getFile(req.params.file, req.user._id);
     res.json({ url: fileUrl });
   } catch (err) {
     if (err.message === 'File not found') {
@@ -104,7 +93,7 @@ exports.getFile = async (req, res) => {
 // DELETE /api/auth/files/delete/:file
 exports.deleteFile = async (req, res) => {
   try {
-    await userService.deleteFile(req.params.file, req.user.googleId);
+    await userService.deleteFile(req.params.file, req.user._id);
     res.status(204).end();
   } catch (err) {
     if (err.message === 'File not found') {
@@ -114,5 +103,46 @@ exports.deleteFile = async (req, res) => {
     } else {
       return res.status(500).json({ error: 'Server error' });
     }
+  }
+};
+
+// POST /api/auth/signup
+exports.signUp = async (req, res) => {
+  try {
+    const message = await userService.signUp(req.body, 'user');
+    res.status(202).json(message);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+//POST /api/auth/admin/signup
+exports.adminSignUp = async (req, res) => {
+  try {
+    const message = await userService.signUp(req.body, 'admin');
+    res.status(202).json(message);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+//POST /api/auth/verifyOTP
+exports.verifyOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    const user = await userService.verifyOTP(email, otp);
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+//POST /api/auth/login
+exports.login = async (req, res) => {
+  try {
+    const { user, token } = await userService.login(req.body);
+    res.status(200).json({ user, token });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };

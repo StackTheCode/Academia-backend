@@ -1,5 +1,5 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GoogleUser = require('../modules/users/models');
+const User = require('../modules/users/models');
 const { PORT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./env');
 
 module.exports = function (passport) {
@@ -11,17 +11,20 @@ module.exports = function (passport) {
         callbackURL: `http://localhost:${PORT}/api/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
         const newUser = {
+          authType: 'google',
           googleId: profile.id,
           displayName: profile.displayName,
+          email: profile.emails[0].value,
           image: profile.photos[0].value,
         };
         try {
-          let user = await GoogleUser.findOne({ googleId: profile.id });
+          let user = await User.findOne({ googleId: profile.id });
           if (user) {
             done(null, user);
           } else {
-            user = await GoogleUser.create(newUser);
+            user = await User.create(newUser);
             done(null, user);
           }
         } catch (err) {
