@@ -1,0 +1,98 @@
+[
+  {
+    "name": "ai_group",
+    "synonyms": ["ai", "artificial intelligence"],
+    "active": true
+  },
+  {
+    "name": "ml_group",
+    "synonyms": ["ml", "machine learning", "neural networks", "stochastic"],
+    "active": true
+  },
+  {
+    "name": "aiml_group",
+    "synonyms": [
+      "aiml",
+      "ai and ml",
+      "artificial intelligence",
+      "machine learning",
+      "neural networks",
+      "stochastic"
+    ],
+    "active": true
+  },
+  {
+    "name": "dl_group",
+    "synonyms": ["dl", "deep learning", "neural networks"],
+    "active": true
+  },
+  {
+    "name": "rl_group",
+    "synonyms": ["rl", "reinforcement learning"],
+    "active": true
+  },
+  {
+    "name": "cnn_group",
+    "synonyms": ["cnn", "neural network", "convolutional neural network"],
+    "active": true
+  },
+  {
+    "name": "dsa_group",
+    "synonyms": [
+      "dsa",
+      "algo",
+      "data structure",
+      "algorithm",
+      "graph",
+      "tree",
+      "np-hard",
+      "np-complete"
+    ],
+    "active": true
+  },
+  {
+    "name": "dbms_group",
+    "synonyms": ["db", "dbms", "database"],
+    "active": true
+  },
+  {
+    "name": "hpc_group",
+    "synonyms": ["hpc", "high performance computing", "cluster computing"],
+    "active": true
+  },
+  {
+    "name": "security_group",
+    "synonyms": ["security", "cybersecurity", "privacy", "surveillance"],
+    "active": true
+  },
+  {
+    "name": "qc_group",
+    "synonyms": ["qc", "qubit", "quantum"],
+    "active": true
+  },
+  {
+    "name": "cv_group",
+    "synonyms": ["cv", "computer vision", "image processing"],
+    "active": true
+  },
+  {
+    "name": "iot_group",
+    "synonyms": ["iot", "sensor", "wireless"],
+    "active": true
+  },
+  {
+    "name": "noc_group",
+    "synonyms": ["noc", "on-chip", "network on-chip"],
+    "active": true
+  },
+  {
+    "name": "cfd_group",
+    "synonyms": ["cfd", "computational fluid dynamics", "fluid dynamics", "fluid mechanics"],
+    "active": true
+  },
+  {
+    "name": "dsp_group",
+    "synonyms": ["dsp", "digital signal processing", "signal processing"],
+    "active": true
+  }
+]

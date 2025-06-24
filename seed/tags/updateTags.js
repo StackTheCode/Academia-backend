@@ -1,7 +1,7 @@
-const professorsService = require('../src/modules/professors/services');
-const departmentsService = require('../src/modules/departments/services');
-const utils = require('./utils');
-const logger = require('../src/config/logger');
+const professorsService = require('../../src/modules/professors/services');
+const departmentsService = require('../../src/modules/departments/services');
+const utils = require('../../crawlers/utils');
+const logger = require('../../src/config/logger');
 const tags = require('./tags.json');
 
 // Tag matching for research interests
@@ -24,7 +24,11 @@ function getTagsForDepartment(departmentName) {
 
 async function updateAllProfessorsWithTags() {
   try {
-    const professors = await professorsService.getAllProfessors({});
+    const { professors } = await professorsService.getAllProfessors({
+      per_page: 250,
+      page: 1,
+      q: '*',
+    });
 
     for (const professor of professors) {
       const department = await departmentsService.getDepartmentById(professor.departmentId);
@@ -37,7 +41,7 @@ async function updateAllProfessorsWithTags() {
         researchInterests: matchedTags,
       });
 
-      logger.info(`Updated ${professor.name} with tags: ${matchedTags.join(', ')}`);
+      logger.info(`Updated ${professor.name} with ${matchedTags.length} tags`);
     }
     logger.info('All professors updated with tags.');
   } catch (err) {
