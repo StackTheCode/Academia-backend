@@ -39,6 +39,7 @@ app.use('/api/departments', require('./modules/departments/routes'));
 app.use('/api/professors', require('./modules/professors/routes'));
 app.use('/api/auth', require('./modules/users/routes'));
 app.use('/api/synonyms', require('./modules/synonyms/routes'));
+app.use('/api/user-prof', require('./modules/user_prof_table/routes'));
 
 // Start server after DB + Typesense are ready
 connect()
