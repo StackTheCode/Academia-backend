@@ -71,40 +71,40 @@ router.post('/', synonymController.createSynonym);
  */
 router.get('/:id', synonymController.getSynonymById);
 
-// /**
-//  * @swagger
-//  * /api/synonyms/{name}:
-//  *   put:
-//  *     summary: Update a synonym group by name
-//  *     tags:
-//  *       - Synonyms
-//  *     parameters:
-//  *       - in: path
-//  *         name: name
-//  *         required: true
-//  *         description: Unique name (ID) of the synonym group to update
-//  *         schema:
-//  *           type: string
-//  *     requestBody:
-//  *       required: true
-//  *       content:
-//  *         application/json:
-//  *           schema:
-//  *             type: object
-//  *             properties:
-//  *               synonyms:
-//  *                 type: array
-//  *                 items:
-//  *                   type: string
-//  *                 example: ["cybersecurity", "AI security"]
-//  *               active:
-//  *                 type: boolean
-//  *                 example: true
-//  *     responses:
-//  *       200:
-//  *         description: Synonym group updated successfully
-//  */
-// router.put('/:name', synonymController.updateSynonym);
+/**
+ * @swagger
+ * /api/synonyms/{name}:
+ *   put:
+ *     summary: Update a synonym group by name
+ *     tags:
+ *       - Synonyms
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: id of the synonym group to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               synonyms:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["cybersecurity", "AI security"]
+ *               active:
+ *                 type: boolean
+ *                 example: true
+ *     responses:
+ *       200:
+ *         description: Synonym group updated successfully
+ */
+router.put('/:id', synonymController.updateSynonym);
 
 /**
  * @swagger

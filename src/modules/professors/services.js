@@ -25,9 +25,10 @@ exports.getAllProfessors = async (filters) => {
       .search(searchOptions);
 
     const ids = searchResult.hits.map((hit) => hit.document.id);
-    const professors = await Professor.find({ _id: { $in: ids } }).populate(
-      'collegeId departmentId'
-    );
+    const professors = await Professor.find({ _id: { $in: ids } })
+      .populate('collegeId', 'name')
+      .populate('departmentId', 'name')
+      .lean();
 
     const ordered = ids
       .map((id) => professors.find((prof) => prof._id.toString() === id))
