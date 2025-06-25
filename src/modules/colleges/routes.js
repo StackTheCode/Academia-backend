@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const collegeController = require('./controllers');
+const authenticateJWT = require('../../middleware/auth');
+const authenticateAdmin = require('../../middleware/admin');
 
 /**
  * @swagger
@@ -44,7 +46,7 @@ router.get('/', collegeController.getAllColleges);
  *       201:
  *         description: College created successfully
  */
-router.post('/', collegeController.createCollege);
+router.post('/', authenticateJWT, authenticateAdmin, collegeController.createCollege);
 
 /**
  * @swagger
@@ -101,7 +103,7 @@ router.get('/:id', collegeController.getCollegeById);
  *       200:
  *         description: College updated successfully
  */
-router.put('/:id', collegeController.updateCollege);
+router.put('/:id', authenticateJWT, authenticateAdmin, collegeController.updateCollege);
 
 /**
  * @swagger
@@ -121,6 +123,6 @@ router.put('/:id', collegeController.updateCollege);
  *       204:
  *         description: College deleted successfully
  */
-router.delete('/:id', collegeController.deleteCollege);
+router.delete('/:id', authenticateJWT, authenticateAdmin, collegeController.deleteCollege);
 
 module.exports = router;

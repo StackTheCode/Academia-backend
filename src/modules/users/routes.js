@@ -96,7 +96,7 @@ router.get('/logout', (req, res) => {
  *       200:
  *         description: Successfully retrieved users
  */
-router.get('/', userController.getAllUsers);
+router.get('/', authenticateJWT, authenticateAdmin, userController.getAllUsers);
 
 /**
  * @swagger
@@ -118,24 +118,17 @@ router.get('/', userController.getAllUsers);
  *       404:
  *         description: User not found
  */
-router.get('/:id', userController.getUserById);
+router.get('/:id', authenticateJWT, userController.getUserById);
 
 /**
  * @swagger
- * /api/auth/{id}:
+ * /api/auth:
  *   put:
- *     summary: Update a user by ID
+ *     summary: Update a user
  *     tags:
  *       - Users
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the user to update
- *         schema:
- *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -143,8 +136,6 @@ router.get('/:id', userController.getUserById);
  *           schema:
  *             type: object
  *             properties:
- *               googleId:
- *                 type: string
  *               displayName:
  *                 type: string
  *               image:
@@ -155,7 +146,7 @@ router.get('/:id', userController.getUserById);
  *       404:
  *         description: User not found
  */
-router.put('/:id', authenticateJWT, userController.updateUser);
+router.put('/', authenticateJWT, userController.updateUser);
 
 /**
  * @swagger
@@ -166,20 +157,13 @@ router.put('/:id', authenticateJWT, userController.updateUser);
  *       - Users
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the user to delete
- *         schema:
- *           type: string
  *     responses:
  *       200:
  *         description: User deleted successfully
  *       404:
  *         description: User not found
  */
-router.delete('/:id', authenticateJWT, authenticateAdmin, userController.deleteUser);
+router.delete('/', authenticateJWT, userController.deleteUser);
 
 /**
  * @swagger

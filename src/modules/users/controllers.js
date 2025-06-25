@@ -22,10 +22,10 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// PUT /api/auth/:id
+// PUT /api/auth
 exports.updateUser = async (req, res) => {
   try {
-    const updated = await userService.updateUser(req.params.id, req.body);
+    const updated = await userService.updateUser(req.user.id, req.body);
     res.json(updated);
   } catch (err) {
     console.error('Update error:', err.message);
@@ -33,11 +33,11 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// DELETE /api/auth/:id
+// DELETE /api/auth
 exports.deleteUser = async (req, res) => {
   try {
     console.log(req.user);
-    await userService.deleteUser(req.params.id);
+    await userService.deleteUser(req.user.id);
     res.status(204).end();
   } catch (err) {
     res.status(500).json({ error: 'Deletion failed' });

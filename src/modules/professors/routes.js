@@ -3,6 +3,8 @@ const router = express.Router();
 const professorController = require('./controllers');
 const Professor = require('./models');
 const typesenseClient = require('../../config/typesense');
+const authenticateJWT = require('../../middleware/auth');
+const authenticateAdmin = require('../../middleware/admin');
 
 /**
  * @swagger
@@ -103,7 +105,7 @@ router.get('/', professorController.getAllProfessors);
  *       201:
  *         description: Professor created successfully
  */
-router.post('/', professorController.createProfessor);
+router.post('/', authenticateJWT, authenticateAdmin, professorController.createProfessor);
 
 /**
  * @swagger
@@ -166,7 +168,7 @@ router.get('/:id', professorController.getProfessorById);
  *       200:
  *         description: Professor updated successfully
  */
-router.put('/:id', professorController.updateProfessor);
+router.put('/:id', authenticateJWT, authenticateAdmin, professorController.updateProfessor);
 
 /**
  * @swagger
@@ -186,7 +188,7 @@ router.put('/:id', professorController.updateProfessor);
  *       204:
  *         description: Professor deleted successfully
  */
-router.delete('/:id', professorController.deleteProfessor);
+router.delete('/:id', authenticateJWT, authenticateAdmin, professorController.deleteProfessor);
 
 /**
  * @swagger
@@ -218,7 +220,7 @@ router.delete('/:id', professorController.deleteProfessor);
  *                   type: string
  *                   example: Internal server error
  */
-router.post('/resync', async (req, res) => {
+router.post('/resync', authenticateJWT, authenticateAdmin, async (req, res) => {
   try {
     const professors = await Professor.find();
     for (const doc of professors) {
