@@ -124,7 +124,7 @@ router.get('/:id', authenticateJWT, userController.getUserById);
  * @swagger
  * /api/auth:
  *   put:
- *     summary: Update a user
+ *     summary: Update user profile
  *     tags:
  *       - Users
  *     security:
@@ -152,7 +152,7 @@ router.put('/', authenticateJWT, userController.updateUser);
  * @swagger
  * /api/auth/{id}:
  *   delete:
- *     summary: Delete a user by ID
+ *     summary: Delete user profile
  *     tags:
  *       - Users
  *     security:
