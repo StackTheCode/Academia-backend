@@ -53,3 +53,6 @@ exports.getProfessorById = async (id) => Professor.findById(id).populate('colleg
 exports.updateProfessor = async (id, data) => Professor.findByIdAndUpdate(id, data, { new: true });
 
 exports.deleteProfessor = async (id) => Professor.findByIdAndDelete(id);
+
+exports.getAllProfessorsByIds = async (profObjectIds) =>
+  Professor.find({ _id: { $in: profObjectIds } });

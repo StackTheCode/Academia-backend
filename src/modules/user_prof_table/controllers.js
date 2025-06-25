@@ -14,7 +14,7 @@ exports.createUserProfEntry = async (req, res) => {
     const newEntry = await userProfService.createUserProfEntry(req.body);
     res.status(201).json(newEntry);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to create entry' });
+    res.status(500).json({ error: err });
   }
 };
 
@@ -63,5 +63,29 @@ exports.deleteUserProfEntry = async (req, res) => {
     res.json({ message: 'Entry deleted successfully' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete entry' });
+  }
+};
+
+exports.insertBatchEntry = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const professorIdsToInsert = req.body;
+    const entries = await userProfService.getUserProfEntriesByUserId(userId);
+    const existingProfIds = new Set(entries.map((entry) => entry.professorId.toString()));
+    const newEntries = professorIdsToInsert
+      .filter((profId) => !existingProfIds.has(profId.toString()))
+      .map((profId) => ({
+        userId: userId,
+        professorId: profId,
+      }));
+    if (newEntries.length > 0) {
+      const inserted = await userProfService.batchInsertUserProfEntries(newEntries);
+      res.status(201).json(inserted);
+    } else {
+      res.status(200).json({ message: 'No new entries to insert.' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to insert batch entries' });
   }
 };

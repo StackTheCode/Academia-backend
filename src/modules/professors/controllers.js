@@ -53,3 +53,19 @@ exports.deleteProfessor = async (req, res) => {
     res.status(500).json({ error: 'Deletion failed' });
   }
 };
+
+exports.getProfessorsByIds = async (req, res) => {
+  try {
+    const professorIds = req.body;
+
+    if (!Array.isArray(professorIds)) {
+      return res.status(400).json({ error: 'Request body must be an array of IDs' });
+    }
+
+    const professors = await professorService.getAllProfessorsByIds(professorIds);
+    res.status(200).json(professors);
+  } catch (err) {
+    console.error('Error fetching professors:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
