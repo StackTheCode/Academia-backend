@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const synonymController = require('./controllers');
+const authenticateJWT = require('../../middleware/auth');
+const authenticateAdmin = require('../../middleware/admin');
 
 /**
  * @swagger
@@ -47,7 +49,7 @@ router.get('/', synonymController.getAllSynonyms);
  *       201:
  *         description: Synonym group created successfully
  */
-router.post('/', synonymController.createSynonym);
+router.post('/', authenticateJWT, authenticateAdmin, synonymController.createSynonym);
 
 /**
  * @swagger
@@ -104,7 +106,7 @@ router.get('/:id', synonymController.getSynonymById);
  *       200:
  *         description: Synonym group updated successfully
  */
-router.put('/:id', synonymController.updateSynonym);
+router.put('/:id', authenticateJWT, authenticateAdmin, synonymController.updateSynonym);
 
 /**
  * @swagger
@@ -124,6 +126,6 @@ router.put('/:id', synonymController.updateSynonym);
  *       204:
  *         description: Synonym deleted successfully
  */
-router.delete('/:id', synonymController.deleteSynonym);
+router.delete('/:id', authenticateJWT, authenticateAdmin, synonymController.deleteSynonym);
 
 module.exports = router;

@@ -19,8 +19,10 @@ module.exports = {
   TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
   BUCKET_NAME: process.env.BUCKET_NAME,
   BUCKET_REGION: process.env.BUCKET_REGION,
+  SES_REGION: process.env.SES_REGION,
   ACCESS_KEY: process.env.ACCESS_KEY,
   SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_HOST: process.env.REDIS_HOST,
+  SES_VERIFIED_EMAIL: process.env.SES_VERIFIED_EMAIL,
 };

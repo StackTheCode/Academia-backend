@@ -4,7 +4,8 @@ const { PORT, JWT_SECRET, FRONTEND_URI } = require('../../config/env');
 const passport = require('passport');
 const router = express.Router();
 const userController = require('./controllers');
-const authenticateJWT = require('../../middleware/auth'); // <--- Add this
+const authenticateJWT = require('../../middleware/auth');
+const authenticateAdmin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
@@ -22,7 +23,10 @@ const upload = multer({ storage: storage });
  *       302:
  *         description: Redirects the user to Google's OAuth consent screen
  */
-router.get('/google', passport.authenticate('google', { session: false, scope: ['profile'] }));
+router.get(
+  '/google',
+  passport.authenticate('google', { session: false, scope: ['profile', 'email'] })
+);
 
 /**
  * @swagger
@@ -49,7 +53,8 @@ router.get(
     const token = jwt.sign(
       {
         id: user._id.toString(),
-        googleId: user.googleId,
+        email: user.email,
+        role: user.role,
       },
       JWT_SECRET,
       { expiresIn: '1h' }
@@ -91,35 +96,7 @@ router.get('/logout', (req, res) => {
  *       200:
  *         description: Successfully retrieved users
  */
-router.get('/', userController.getAllUsers);
-/**
- * @swagger
- * /api/auth:
- *   post:
- *     summary: Create a new user
- *     tags:
- *       - Users
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - googleId
- *               - displayName
- *             properties:
- *               googleId:
- *                 type: string
- *               displayName:
- *                 type: string
- *               image:
- *                 type: string
- *     responses:
- *       201:
- *         description: User created successfully
- */
-router.post('/', userController.createUser);
+router.get('/', authenticateJWT, authenticateAdmin, userController.getAllUsers);
 
 /**
  * @swagger
@@ -141,24 +118,17 @@ router.post('/', userController.createUser);
  *       404:
  *         description: User not found
  */
-router.get('/:id', userController.getUserById);
+router.get('/:id', authenticateJWT, userController.getUserById);
 
 /**
  * @swagger
- * /api/auth/{id}:
+ * /api/auth:
  *   put:
- *     summary: Update a user by ID
+ *     summary: Update user profile
  *     tags:
  *       - Users
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the user to update
- *         schema:
- *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -166,8 +136,6 @@ router.get('/:id', userController.getUserById);
  *           schema:
  *             type: object
  *             properties:
- *               googleId:
- *                 type: string
  *               displayName:
  *                 type: string
  *               image:
@@ -178,31 +146,24 @@ router.get('/:id', userController.getUserById);
  *       404:
  *         description: User not found
  */
-router.put('/:id', authenticateJWT, userController.updateUser);
+router.put('/', authenticateJWT, userController.updateUser);
 
 /**
  * @swagger
- * /api/auth/{id}:
+ * /api/auth:
  *   delete:
- *     summary: Delete a user by ID
+ *     summary: Delete user profile
  *     tags:
  *       - Users
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID of the user to delete
- *         schema:
- *           type: string
  *     responses:
  *       200:
  *         description: User deleted successfully
  *       404:
  *         description: User not found
  */
-router.delete('/:id', authenticateJWT, userController.deleteUser);
+router.delete('/', authenticateJWT, userController.deleteUser);
 
 /**
  * @swagger
@@ -381,5 +342,143 @@ router.get('/files/get-one/:file', authenticateJWT, userController.getFile);
  *         description: Internal server error
  */
 router.delete('/files/delete/:file', authenticateJWT, userController.deleteFile);
+
+/**
+ * @swagger
+ * /api/auth/signup:
+ *   post:
+ *     summary: Create a new user
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - displayName
+ *               - email
+ *               - password
+ *             properties:
+ *               displayName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       202:
+ *         description: OTP Sent Successfully
+ */
+router.post('/signup', userController.signUp);
+
+/**
+ * @swagger
+ * /api/auth/admin/signup:
+ *   post:
+ *     summary: Create a new user
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - displayName
+ *               - email
+ *               - password
+ *             properties:
+ *               displayName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       202:
+ *         description: OTP Sent Successfully
+ */
+router.post('/admin/signup', userController.adminSignUp);
+
+/**
+ * @swagger
+ * /api/auth/verifyOTP:
+ *   post:
+ *     summary: Verify OTP to complete user registration
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - otp
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: user@example.com
+ *               otp:
+ *                 type: string
+ *                 example: "123456"
+ *     responses:
+ *       201:
+ *         description: User created successfully after OTP verification
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: User created successfully
+ *                 userId:
+ *                   type: string
+ *                   example: 60d0fe4f5311236168a109ca
+ *       400:
+ *         description: Invalid OTP or expired OTP
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid OTP
+ */
+router.post('/verifyOTP', userController.verifyOTP);
+
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Normal Login
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login Successful
+ */
+router.post('/login', userController.login);
 
 module.exports = router;
