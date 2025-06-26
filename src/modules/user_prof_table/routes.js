@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userProfController = require('./controllers');
-
+const authenticateJWT = require('../../middleware/auth');
 /**
  * @swagger
  * /api/user-Prof:
@@ -13,7 +13,7 @@ const userProfController = require('./controllers');
  *       200:
  *         description: Successfully retrieved entries
  */
-router.get('/', userProfController.getAllUserProfEntries);
+router.get('/', authenticateJWT, userProfController.getAllUserProfEntries);
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ router.get('/', userProfController.getAllUserProfEntries);
  *       201:
  *         description: Entry created successfully
  */
-router.post('/', userProfController.createUserProfEntry);
+router.post('/', authenticateJWT, userProfController.createUserProfEntry);
 
 /**
  * @swagger
@@ -63,27 +63,20 @@ router.post('/', userProfController.createUserProfEntry);
  *       404:
  *         description: Entry not found
  */
-router.get('/:id', userProfController.getUserProfEntryById);
+router.get('/:id', authenticateJWT, userProfController.getUserProfEntryById);
 
 /**
  * @swagger
- * /api/user-Prof/user/{userId}:
+ * /api/user-Prof/user/batch:
  *   get:
  *     summary: Get all entries by user ID
  *     tags:
  *       - UserProf
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         description: ID of the user
- *         schema:
- *           type: string
  *     responses:
  *       200:
  *         description: Entries retrieved successfully
  */
-router.get('/user/:userId', userProfController.getUserProfEntriesByUserId);
+router.get('/user/batch', authenticateJWT, userProfController.getUserProfEntriesByUserId);
 
 /**
  * @swagger
@@ -103,7 +96,11 @@ router.get('/user/:userId', userProfController.getUserProfEntriesByUserId);
  *       200:
  *         description: Entries retrieved successfully
  */
-router.get('/professor/:professorId', userProfController.getUserProfEntriesByProfessorId);
+router.get(
+  '/professor/:professorId',
+  authenticateJWT,
+  userProfController.getUserProfEntriesByProfessorId
+);
 
 /**
  * @swagger
@@ -136,7 +133,7 @@ router.get('/professor/:professorId', userProfController.getUserProfEntriesByPro
  *       404:
  *         description: Entry not found
  */
-router.put('/:id', userProfController.updateUserProfEntry);
+router.put('/:id', authenticateJWT, userProfController.updateUserProfEntry);
 
 /**
  * @swagger
@@ -158,22 +155,15 @@ router.put('/:id', userProfController.updateUserProfEntry);
  *       404:
  *         description: Entry not found
  */
-router.delete('/:id', userProfController.deleteUserProfEntry);
+router.delete('/:id', authenticateJWT, userProfController.deleteUserProfEntry);
 
 /**
  * @swagger
- * /api/user-Prof/batch/{userId}:
+ * /api/user-Prof/batch
  *   post:
- *     summary: Batch insert professor entries for a user
+ *     summary: Batch insert professor entries for a user by ID
  *     tags:
  *       - UserProf
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: The ID of the user
  *     requestBody:
  *       required: true
  *       content:
@@ -191,6 +181,6 @@ router.delete('/:id', userProfController.deleteUserProfEntry);
  *       500:
  *         description: Failed to insert batch entries
  */
-router.post('/batch/:userId', userProfController.insertBatchEntry);
+router.post('/batch', authenticateJWT, userProfController.insertBatchEntry);
 
 module.exports = router;

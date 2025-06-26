@@ -30,7 +30,7 @@ exports.getUserProfEntryById = async (req, res) => {
 
 exports.getUserProfEntriesByUserId = async (req, res) => {
   try {
-    const entries = await userProfService.getUserProfEntriesByUserId(req.params.userId);
+    const entries = await userProfService.getUserProfEntriesByUserId(req.user.id);
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch user entries' });
@@ -68,7 +68,7 @@ exports.deleteUserProfEntry = async (req, res) => {
 
 exports.insertBatchEntry = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.user.id;
     const professorIdsToInsert = req.body;
     const entries = await userProfService.getUserProfEntriesByUserId(userId);
     const existingProfIds = new Set(entries.map((entry) => entry.professorId.toString()));
