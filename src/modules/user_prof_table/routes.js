@@ -159,7 +159,7 @@ router.delete('/:id', authenticateJWT, userProfController.deleteUserProfEntry);
 
 /**
  * @swagger
- * /api/user-Prof/batch
+ * /api/user-Prof/batch:
  *   post:
  *     summary: Batch insert professor entries for a user by ID
  *     tags:
