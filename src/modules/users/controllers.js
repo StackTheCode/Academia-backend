@@ -47,8 +47,8 @@ exports.deleteUser = async (req, res) => {
 // GET /api/auth/files
 exports.getAllFiles = async (req, res) => {
   try {
-    console.log(req.user._id);
-    const uploadedFiles = await userService.getAllFiles(req.user._id);
+    console.log(req.user.id);
+    const uploadedFiles = await userService.getAllFiles(req.user.id);
     return res.status(200).json({ uploadedFiles });
   } catch (err) {
     if (err.message === 'User not found') {
@@ -66,7 +66,7 @@ exports.createFile = async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    await userService.createFile(req.file, req.user._id);
+    await userService.createFile(req.file, req.user.id);
     res.status(201).json({ message: 'File uploaded successfully' });
   } catch (err) {
     console.error('Upload error:', err);
@@ -77,7 +77,7 @@ exports.createFile = async (req, res) => {
 // GET /api/auth/files/get-one/:file
 exports.getFile = async (req, res) => {
   try {
-    const fileUrl = await userService.getFile(req.params.file, req.user._id);
+    const fileUrl = await userService.getFile(req.params.file, req.user.id);
     res.json({ url: fileUrl });
   } catch (err) {
     if (err.message === 'File not found') {
@@ -93,7 +93,7 @@ exports.getFile = async (req, res) => {
 // DELETE /api/auth/files/delete/:file
 exports.deleteFile = async (req, res) => {
   try {
-    await userService.deleteFile(req.params.file, req.user._id);
+    await userService.deleteFile(req.params.file, req.user.id);
     res.status(204).end();
   } catch (err) {
     if (err.message === 'File not found') {

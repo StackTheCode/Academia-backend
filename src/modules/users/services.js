@@ -33,7 +33,7 @@ exports.deleteUser = async (id) => {
 
 exports.getAllFiles = async (id) => {
   console.log(id);
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id: id });
   if (!user) {
     throw new Error('User not found');
   }
@@ -52,7 +52,7 @@ exports.createFile = async (file, id) => {
   const command = new PutObjectCommand(params);
   await aws.s3.send(command);
 
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id: id });
   if (!user) {
     throw new Error('User not found');
   }
@@ -61,7 +61,7 @@ exports.createFile = async (file, id) => {
 };
 
 exports.getFile = async (file, id) => {
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id: id });
 
   if (!user) {
     throw new Error('User not found');
@@ -90,7 +90,7 @@ exports.getFile = async (file, id) => {
 };
 
 exports.deleteFile = async (file, id) => {
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id: id });
 
   if (!user) {
     throw new Error('User not found');
