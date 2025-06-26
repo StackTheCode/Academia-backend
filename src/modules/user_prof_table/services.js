@@ -14,3 +14,5 @@ exports.updateUserProfEntry = async (id, data) =>
   UserProf.findByIdAndUpdate(id, data, { new: true });
 
 exports.deleteUserProfEntry = async (id) => UserProf.findByIdAndDelete(id);
+
+exports.batchInsertUserProfEntries = async (data) => UserProf.insertMany(data, { ordered: false });

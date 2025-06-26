@@ -244,4 +244,51 @@ router.post('/resync', authenticateJWT, authenticateAdmin, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/professors/batch:
+ *   post:
+ *     summary: Retrieve multiple professors by their IDs
+ *     tags:
+ *       - Professors
+ *     requestBody:
+ *       required: true
+ *       description: Array of professor ObjectIds
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: string
+ *               example: 665f2f6b9123abcde1234567
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved professor details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Professor'
+ *       400:
+ *         description: Invalid input; request body must be an array of ObjectIds
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+router.post('/batch', professorController.getProfessorsByIds);
+
 module.exports = router;
