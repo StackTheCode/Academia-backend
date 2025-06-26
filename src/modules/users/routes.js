@@ -150,7 +150,7 @@ router.put('/', authenticateJWT, userController.updateUser);
 
 /**
  * @swagger
- * /api/auth/{id}:
+ * /api/auth:
  *   delete:
  *     summary: Delete user profile
  *     tags:

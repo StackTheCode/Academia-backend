@@ -106,7 +106,7 @@ router.get('/:id', synonymController.getSynonymById);
  *       200:
  *         description: Synonym group updated successfully
  */
-router.put('/:id', synonymController.updateSynonym);
+router.put('/:id', authenticateJWT, authenticateAdmin, synonymController.updateSynonym);
 
 /**
  * @swagger
