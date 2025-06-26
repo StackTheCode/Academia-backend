@@ -203,7 +203,7 @@ exports.login = async (userData) => {
     throw new Error('Email does not exist');
   }
 
-  const isMatch = bcrypt.compare(password, existingUser.password);
+  const isMatch = await bcrypt.compare(password, existingUser.password);
 
   if (!isMatch) {
     console.log('Invalid password');
