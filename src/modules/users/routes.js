@@ -1,6 +1,12 @@
-const { resolve } = require('bluebird');
 const express = require('express');
-const { PORT, JWT_SECRET, FRONTEND_URI } = require('../../config/env');
+const {
+  JWT_SECRET,
+  FRONTEND_URI,
+  API_GATEWAY_URL,
+  SES_REGION,
+  ACCESS_KEY,
+  SECRET_ACCESS_KEY,
+} = require('../../config/env');
 const passport = require('passport');
 const router = express.Router();
 const userController = require('./controllers');
@@ -480,5 +486,45 @@ router.post('/verifyOTP', userController.verifyOTP);
  *         description: Login Successful
  */
 router.post('/login', userController.login);
+
+/**
+ * @swagger
+ * /api/auth/summary-status:
+ *   post:
+ *     summary: Poll summary status from API Gateway using AWS Signature V4
+ *     tags:
+ *       - Summary
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - fileName
+ *             properties:
+ *               fileName:
+ *                 type: string
+ *                 description: The name of the file for which to check summary status
+ *     responses:
+ *       200:
+ *         description: Summary status fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: completed
+ *                 summary:
+ *                   type: string
+ *                   example: This is the summary of the uploaded document.
+ *       400:
+ *         description: Missing fileName in request body
+ *       500:
+ *         description: Failed to fetch summary status from API Gateway
+ */
+router.post('/summary-status', userController.checkSummaryStatus);
 
 module.exports = router;

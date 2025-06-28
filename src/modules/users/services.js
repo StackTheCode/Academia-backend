@@ -4,12 +4,23 @@ const User = require('./models');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const { SendEmailCommand } = require('@aws-sdk/client-ses');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
-const { BUCKET_NAME, JWT_SECRET, SES_VERIFIED_EMAIL } = require('../../config/env');
-
+const {
+  BUCKET_NAME,
+  JWT_SECRET,
+  SES_VERIFIED_EMAIL,
+  API_GATEWAY_URL,
+  API_GATEWAY_REGION,
+  ACCESS_KEY,
+  SECRET_ACCESS_KEY,
+} = require('../../config/env');
 const redis = require('../../config/redis');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const aws = require('../../config/aws');
+const axios = require('axios');
+const { SignatureV4 } = require('@aws-sdk/signature-v4');
+const { HttpRequest } = require('@aws-sdk/protocol-http');
+const { Sha256 } = require('@aws-crypto/sha256-js');
 
 // Fetch all users
 exports.getAllUsers = async () => {
@@ -221,4 +232,52 @@ exports.login = async (userData) => {
   );
 
   return { existingUser, token };
+};
+
+exports.checkSummaryStatusFromGateway = async (fileName) => {
+  const url = new URL(API_GATEWAY_URL);
+
+  const body = JSON.stringify({
+    body: JSON.stringify({ fileName }),
+  });
+
+  const request = new HttpRequest({
+    method: 'POST',
+    protocol: 'https:',
+    path: url.pathname,
+    headers: {
+      'Content-Type': 'application/json',
+      host: url.host,
+    },
+    hostname: url.host,
+    body,
+  });
+
+  const signer = new SignatureV4({
+    credentials: {
+      accessKeyId: ACCESS_KEY,
+      secretAccessKey: SECRET_ACCESS_KEY,
+    },
+    region: API_GATEWAY_REGION,
+    service: 'execute-api',
+    sha256: Sha256,
+  });
+
+  const signedRequest = await signer.sign(request);
+
+  const response = await axios.post(API_GATEWAY_URL, body, {
+    headers: signedRequest.headers,
+  });
+
+  let parsed = response.data;
+
+  if (parsed.body && typeof parsed.body === 'string') {
+    try {
+      parsed = JSON.parse(parsed.body);
+    } catch (e) {
+      parsed = { raw: parsed.body };
+    }
+  }
+
+  return parsed;
 };

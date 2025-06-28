@@ -146,3 +146,18 @@ exports.login = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
+exports.checkSummaryStatus = async (req, res) => {
+  try {
+    const { fileName } = req.body;
+
+    if (!fileName) {
+      return res.status(400).json({ error: 'Missing fileName' });
+    }
+
+    const result = await userService.checkSummaryStatusFromGateway(fileName);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to fetch summary status' });
+  }
+};
