@@ -25,4 +25,7 @@ module.exports = {
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_HOST: process.env.REDIS_HOST,
   SES_VERIFIED_EMAIL: process.env.SES_VERIFIED_EMAIL,
+  API_GATEWAY_URL: process.env.API_GATEWAY_URL,
+  API_GATEWAY_REGION: process.env.API_GATEWAY_REGION,
+  BACKEND_URL: process.env.BACKEND_URL,
 };
