@@ -139,6 +139,11 @@ exports.signUp = async (userData, role) => {
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   const cacheKey = `otp:${email}`;
+  const cachedData = await redis.get(cacheKey);
+  if (cachedData) {
+    return { message: 'OTP sent to email. Please verify to continue.' };
+  }
+
   await redis.set(cacheKey, JSON.stringify({ otp, password, displayName, role }), 'EX', 300);
 
   const emailParams = {
