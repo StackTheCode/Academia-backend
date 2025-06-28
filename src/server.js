@@ -3,7 +3,7 @@ const cors = require('cors');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const { connect } = require('./config/db');
-const { PORT, NODE_ENV } = require('./config/env');
+const { PORT, NODE_ENV, FRONTEND_URI } = require('./config/env');
 const logger = require('./config/logger');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // Frontend origin
+    origin: FRONTEND_URI, // Frontend origin
     credentials: true,
   })
 );
