@@ -55,4 +55,4 @@ exports.updateProfessor = async (id, data) => Professor.findByIdAndUpdate(id, da
 exports.deleteProfessor = async (id) => Professor.findByIdAndDelete(id);
 
 exports.getAllProfessorsByIds = async (profObjectIds) =>
-  Professor.find({ _id: { $in: profObjectIds } });
+  Professor.find({ _id: { $in: profObjectIds } }).populate('collegeId');
