@@ -87,7 +87,9 @@ async function scrapeProfilesCSE() {
     // Process all links
     for (const link of links) {
       const data = await fetchProfile(link);
-      if (data) results.push(data);
+      if (data) {
+        results.push({ ...data, college_website: link });
+      }
     }
     logger.info(`Number of professors: ${results.length}`);
     return results;
@@ -115,6 +117,7 @@ async function insertInDB() {
         researchInterests: [prof.researchInterests.trim()],
         personal_website: prof.personalWebsite,
         position: prof.designation,
+        college_website: prof.college_website,
       };
       const createdProf = await professorsService.createProfessor(prof_data);
       logger.info(`Created: ${createdProf.name}`);
