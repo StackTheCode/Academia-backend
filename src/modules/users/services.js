@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const User = require('./models');
+const logger = require('../../config/logger');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const { SendEmailCommand } = require('@aws-sdk/client-ses');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
@@ -43,7 +44,7 @@ exports.deleteUser = async (id) => {
 };
 
 exports.getAllFiles = async (id) => {
-  console.log(id);
+  logger.info(`User with id ${id} requested to get all files`);
   const user = await User.findOne({ _id: id });
   if (!user) {
     throw new Error('User not found');
@@ -86,7 +87,7 @@ exports.getFile = async (file, id) => {
   const cachedUrl = await redis.get(cacheKey);
 
   if (cachedUrl) {
-    console.log('Already Present');
+    logger.info('Already Present');
     return cachedUrl;
   }
 
@@ -126,7 +127,7 @@ exports.deleteFile = async (file, id) => {
 
   if (cachedUrl) {
     await redis.del(cacheKey);
-    console.log('Deleted file from cache');
+    logger.info('Deleted file from cache');
   }
 };
 
@@ -168,9 +169,9 @@ exports.signUp = async (userData, role) => {
   try {
     const command = new SendEmailCommand(emailParams);
     const res = await aws.ses.send(command);
-    console.log('Email has been sent', res);
+    logger.info('Email has been sent', res);
   } catch (err) {
-    console.log(err);
+    logger.error('Failed to send verification email:', err);
     await redis.del(cacheKey);
     throw new Error('Failed to send verification email');
   }
@@ -208,7 +209,7 @@ exports.verifyOTP = async (email, clientOTP) => {
   });
 
   await redis.del(cacheKey);
-  console.log('Signup Successful');
+  logger.info('Signup Successful');
   return newUser;
 };
 
@@ -222,10 +223,10 @@ exports.login = async (userData) => {
   const isMatch = await bcrypt.compare(password, existingUser.password);
 
   if (!isMatch) {
-    console.log('Invalid password');
+    logger.info('Invalid password');
     throw new Error('Wrong Password');
   }
-  console.log('Password is correct');
+  logger.info('Password is correct');
   const token = jwt.sign(
     {
       id: existingUser._id.toString(),

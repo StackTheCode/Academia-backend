@@ -1,4 +1,5 @@
 const userProfService = require('./services');
+const logger = require('../../config/logger');
 
 exports.getAllUserProfEntries = async (req, res) => {
   try {
@@ -85,7 +86,7 @@ exports.insertBatchEntry = async (req, res) => {
       res.status(200).json({ message: 'No new entries to insert.' });
     }
   } catch (err) {
-    console.error(err);
+    logger.error('Failed to insert batch entry', err);
     res.status(500).json({ error: 'Failed to insert batch entries' });
   }
 };

@@ -1,4 +1,5 @@
 const professorService = require('./services');
+const logger = require('../../config/logger');
 
 exports.getAllProfessors = async (req, res) => {
   try {
@@ -12,8 +13,8 @@ exports.getAllProfessors = async (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    console.log(`${err}`);
-    res.status(500).json({ error: 'Failed to fetch professors: ${err}' });
+    logger.error(`Failed to fetch professors: ${err}`);
+    res.status(500).json({ error: `Failed to fetch professors: ${err}` });
   }
 };
 
@@ -65,7 +66,7 @@ exports.getProfessorsByIds = async (req, res) => {
     const professors = await professorService.getAllProfessorsByIds(professorIds);
     res.status(200).json(professors);
   } catch (err) {
-    console.error('Error fetching professors:', err);
+    logger.error('Error fetching professors:', err);
     res.status(500).json({ error: err.message });
   }
 };
