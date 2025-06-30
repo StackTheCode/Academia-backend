@@ -4,16 +4,16 @@ Academia is a platform designed to simplify the process of finding and connectin
 
 ## 🚀 Features
 
-- 🔎 Search and Filter Professors
+- 🔎 Search and Filter Professors<br>
   Find Professors based on:
   - College
   - Department
   - Research Interests
-- 📄 Paper Summarizations
+- 📄 Paper Summarizations<br>
   Summarized versions of professors' recent papers to:
   - Understand their research at a glance
   - Write cold emails more effectively
-- 🗂️ Personalized Dashboard
+- 🗂️ Personalized Dashboard<br>
   A user-specific dashboard to:
   - Save and manage professor profiles
   - Upload and organize research files
