@@ -1,7 +1,7 @@
 const Professor = require('../modules/professors/models');
 const Synonym = require('../modules/synonyms/models');
 const typesenseClient = require('../config/typesense');
-const logger = require('./logger');
+const logger = require('../config/logger');
 
 async function startProfessorChangeStream() {
   const changeStream = Professor.watch([], { fullDocument: 'updateLookup' });

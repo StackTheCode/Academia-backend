@@ -32,6 +32,8 @@ exports.getUserProfEntryById = async (req, res) => {
 exports.getUserProfEntriesByUserId = async (req, res) => {
   try {
     const entries = await userProfService.getUserProfEntriesByUserId(req.user.id);
+    if (!entries || entries.length === 0)
+      return res.status(404).json({ error: 'Entries not found' });
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch user entries' });
@@ -41,6 +43,8 @@ exports.getUserProfEntriesByUserId = async (req, res) => {
 exports.getUserProfEntriesByProfessorId = async (req, res) => {
   try {
     const entries = await userProfService.getUserProfEntriesByProfessorId(req.params.professorId);
+    if (!entries || entries.length === 0)
+      return res.status(404).json({ error: 'Entries not found' });
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch professor entries' });
