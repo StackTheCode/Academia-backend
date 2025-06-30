@@ -1,9 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const collegeService = require('../../modules/colleges/services');
-const professorsService = require('../../modules/professors/services');
+const collegeService = require('../../src/modules/colleges/services');
+const professorsService = require('../../src/modules/professors/services');
 const utils = require('../utils');
-const logger = require('../../config/logger');
+const logger = require('../../src/config/logger');
 
 const URL = 'https://www.cse.iitm.ac.in/listpeople.php?arg=MSQw';
 const BASE_URL = 'https://www.cse.iitm.ac.in/';
@@ -87,9 +87,11 @@ async function scrapeProfilesCSE() {
     // Process all links
     for (const link of links) {
       const data = await fetchProfile(link);
-      if (data) results.push(data);
+      if (data) {
+        results.push({ ...data, college_website: link });
+      }
     }
-
+    logger.info(`Number of professors: ${results.length}`);
     return results;
   } catch (err) {
     logger.error('Error fetching page:', err.message);
@@ -115,6 +117,7 @@ async function insertInDB() {
         researchInterests: [prof.researchInterests.trim()],
         personal_website: prof.personalWebsite,
         position: prof.designation,
+        college_website: prof.college_website,
       };
       const createdProf = await professorsService.createProfessor(prof_data);
       logger.info(`Created: ${createdProf.name}`);

@@ -1,4 +1,4 @@
-require('dotenv').config(); // This loads .env from the root by default
+require('dotenv').config();
 
 module.exports = {
   PORT: process.env.PORT,
@@ -13,5 +13,19 @@ module.exports = {
   MONGO_URI: process.env.MONGO_URI,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-  SESSION_SECRET: process.env.SESSION_SECRET,
+  JWT_SECRET: process.env.JWT_SECRET,
+  FRONTEND_URI: process.env.FRONTEND_URI,
+  TYPESENSE_HOST: process.env.TYPESENSE_HOST,
+  TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
+  BUCKET_NAME: process.env.BUCKET_NAME,
+  BUCKET_REGION: process.env.BUCKET_REGION,
+  SES_REGION: process.env.SES_REGION,
+  ACCESS_KEY: process.env.ACCESS_KEY,
+  SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
+  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_HOST: process.env.REDIS_HOST,
+  SES_VERIFIED_EMAIL: process.env.SES_VERIFIED_EMAIL,
+  API_GATEWAY_URL: process.env.API_GATEWAY_URL,
+  API_GATEWAY_REGION: process.env.API_GATEWAY_REGION,
+  BACKEND_URL: process.env.BACKEND_URL,
 };

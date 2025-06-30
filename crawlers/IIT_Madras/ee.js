@@ -1,9 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const collegeService = require('../../modules/colleges/services');
-const professorsService = require('../../modules/professors/services');
+const collegeService = require('../../src/modules/colleges/services');
+const professorsService = require('../../src/modules/professors/services');
 const utils = require('../utils');
-const logger = require('../../config/logger');
+const logger = require('../../src/config/logger');
 
 const baseUrl = 'https://www.ee.iitm.ac.in/faculty/';
 async function scrapeProfilesEE() {
@@ -85,6 +85,25 @@ async function scrapeProfilesEE() {
           }
         });
 
+        if (researchInterests === 'Unavailable') {
+          $('div.accordion-item').each((_, item) => {
+            const heading = $(item).find('button.accordion-button span').text().toLowerCase();
+            const contentDiv = $(item).find('div.accordion-body');
+
+            if (heading.includes('about')) {
+              const aboutText = contentDiv
+                .text()
+                .replace(/\s+/g, ' ')
+                .trim()
+                .replace(/\s*\.\s*$/, '');
+              if (aboutText) {
+                researchInterests = aboutText;
+              }
+              return false; // break the loop
+            }
+          });
+        }
+
         return {
           name,
           designation,
@@ -101,11 +120,12 @@ async function scrapeProfilesEE() {
     // Immediately invoked async function (unnamed)
     let results = [];
     for (const url of facultyLinks) {
-      const details = await extractProfessorDetails(url);
-      if (details) {
-        results.push(details);
+      const data = await extractProfessorDetails(url);
+      if (data) {
+        results.push({ ...data, college_website: url });
       }
     }
+    logger.info(`Number of professors: ${results.length}`);
     return results;
   } catch (err) {
     logger.error('Error fetching page:', err.message);
@@ -131,6 +151,7 @@ async function insertInDB() {
         researchInterests: [prof.researchInterests.trim()],
         personal_website: prof.personalWebsite,
         position: prof.designation,
+        college_website: prof.college_website,
       };
       const createdProf = await professorsService.createProfessor(prof_data);
       logger.info(`Created: ${createdProf.name}`);

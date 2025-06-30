@@ -1,46 +1,36 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
-const GoogleUser = require('../modules/users/models');
-const { PORT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./env');
-
+const User = require('../modules/users/models');
+const { BACKEND_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('./env');
+const logger = require('./logger');
 module.exports = function (passport) {
   passport.use(
     new GoogleStrategy(
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: `http://localhost:${PORT}/api/auth/google/callback`,
+        callbackURL: `${BACKEND_URL}/api/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
+        logger.info('profile:', profile);
         const newUser = {
+          authType: 'google',
           googleId: profile.id,
           displayName: profile.displayName,
+          email: profile.emails[0].value,
           image: profile.photos[0].value,
         };
         try {
-          let user = await GoogleUser.findOne({ googleId: profile.id });
+          let user = await User.findOne({ googleId: profile.id });
           if (user) {
             done(null, user);
           } else {
-            user = await GoogleUser.create(newUser);
+            user = await User.create(newUser);
             done(null, user);
           }
         } catch (err) {
-          console.log(err);
+          logger.error('Error creating user: ', err);
         }
       }
     )
   );
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await GoogleUser.findById(id);
-      done(null, user);
-    } catch (err) {
-      done(err);
-    }
-  });
 };

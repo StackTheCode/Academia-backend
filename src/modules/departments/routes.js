@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const departmentController = require('./controllers');
+const authenticateJWT = require('../../middleware/auth');
+const authenticateAdmin = require('../../middleware/admin');
 
 /**
  * @swagger
@@ -36,7 +38,7 @@ router.get('/', departmentController.getAllDepartments);
  *       201:
  *         description: Department created successfully
  */
-router.post('/', departmentController.createDepartment);
+router.post('/', authenticateJWT, authenticateAdmin, departmentController.createDepartment);
 
 /**
  * @swagger
@@ -87,7 +89,7 @@ router.get('/:id', departmentController.getDepartmentById);
  *       200:
  *         description: Department updated successfully
  */
-router.put('/:id', departmentController.updateDepartment);
+router.put('/:id', authenticateJWT, authenticateAdmin, departmentController.updateDepartment);
 
 /**
  * @swagger
@@ -107,6 +109,6 @@ router.put('/:id', departmentController.updateDepartment);
  *       204:
  *         description: Department deleted successfully
  */
-router.delete('/:id', departmentController.deleteDepartment);
+router.delete('/:id', authenticateJWT, authenticateAdmin, departmentController.deleteDepartment);
 
 module.exports = router;

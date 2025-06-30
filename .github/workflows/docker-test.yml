@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ci_testing
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Load Secrets to .env File
+      run: |
+        echo "$CI_SECRETS" > .env
+      env:
+        CI_SECRETS: ${{ secrets.CI_SECRETS }}    
+
+    - name: Check ENV File 
+      uses: falti/dotenv-action@v1
+
+    - name: create Keyfile for replicaset
+      run: |
+        chmod +x keyfile.sh
+        ./keyfile.sh
+
+    - name: Build and Start Docker Containers
+      run: docker compose --env-file .env up --build -d
+
+    - name: Wait for MongoDB to be ready
+      run: |
+        echo "Waiting for MongoDB to be ready..."
+        for i in {1..10}; do
+          docker compose exec -T mongo mongosh --eval "db.adminCommand('ping')" && break
+          sleep 3
+        done

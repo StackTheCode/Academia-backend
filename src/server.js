@@ -1,54 +1,63 @@
-// src/server.js
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
-const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const { connect } = require('./config/db');
-const { PORT, NODE_ENV, SESSION_SECRET } = require('./config/env');
+const { PORT, NODE_ENV, FRONTEND_URI } = require('./config/env');
 const logger = require('./config/logger');
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
-const path = require('path');
-const { ensureAuth, ensureGuest } = require('./middleware/auth');
+const initTypesenseSchema = require('../scripts/init-typesense'); // ← add this
+const {
+  startProfessorChangeStream,
+  startSynonymChangeStream,
+  initSynonyms,
+} = require('./utils/typesense');
 
 require('./config/passport')(passport);
-connect();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
 
-//Session Middleware
 app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+  cors({
+    origin: FRONTEND_URI, // Frontend origin
+    credentials: true,
   })
 );
 
-//Passport Middleware
 app.use(passport.initialize());
-app.use(passport.session());
 
 if (NODE_ENV === 'DEV') {
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-
-  app.use(express.static('.'));
-  app.get('/', ensureGuest, (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
-  app.get('/dashboard', ensureAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'dashboard.html'));
-  });
 }
 
+// Routes
 app.use('/api/colleges', require('./modules/colleges/routes'));
 app.use('/api/departments', require('./modules/departments/routes'));
 app.use('/api/professors', require('./modules/professors/routes'));
 app.use('/api/auth', require('./modules/users/routes'));
+app.use('/api/synonyms', require('./modules/synonyms/routes'));
+app.use('/api/user-prof', require('./modules/user_prof_table/routes'));
 
-// Your routes go here
-// app.use('/api', require('./api'));
+// Start server after DB + Typesense are ready
+connect()
+  .then(async () => {
+    logger.info('✅ MongoDB connected');
 
-app.listen(PORT, () => logger.info(`Server Start at ${PORT}`));
+    // Initialize Typesense schema only if it doesn’t exist
+    await initTypesenseSchema();
+    await initSynonyms(); // <- right after schema
+
+    // Start listening for changes in MongoDB
+    startProfessorChangeStream();
+    startSynonymChangeStream();
+
+    // Start Express server
+    app.listen(PORT, () => logger.info(`🚀 Server started on port ${PORT}`));
+  })
+  .catch((err) => {
+    logger.error('❌ Failed to start server:', err.message || err);
+    process.exit(1);
+  });

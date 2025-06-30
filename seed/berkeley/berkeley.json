@@ -1,0 +1,1037 @@
+[
+  {
+    "name": "Pieter Abbeel",
+    "position": "Professor",
+    "email": "pabbeel@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~pabbeel/",
+    "researchInterests": [
+      "Artificial Intelligence",
+      "Robotics",
+      "Deep Reinforcement Learning",
+      "Autonomous Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html"
+  },
+  {
+    "name": "Ahmed Alaa",
+    "position": "Assistant Professor",
+    "email": "amalaa@berkeley.edu",
+    "personal_website": "https://amalaa.github.io/",
+    "researchInterests": ["Causal Inference", "Bayesian Deep Learning", "Health AI"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/amalaa.html"
+  },
+  {
+    "name": "Krste Asanović",
+    "position": "Professor",
+    "email": "krste@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~krste/",
+    "researchInterests": ["Computer Architecture", "RISC-V", "Parallel Computing"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/asanovic.html"
+  },
+  {
+    "name": "Babak Ayazifar",
+    "position": "Teaching Professor",
+    "email": "ayazifar@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Signal Processing", "Image Processing", "Engineering Education"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ayazifar.html"
+  },
+  {
+    "name": "Ruzena Bajcsy",
+    "position": "Professor Emerita",
+    "email": "bajcsy@seas.upenn.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~bajcsy/",
+    "researchInterests": ["Robotics", "Computer Vision", "Medical Imaging"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/bajcsy.html"
+  },
+  {
+    "name": "Michael Ball",
+    "position": "Lecturer",
+    "email": "ball@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Computer Science Education", "Software Development"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/mball.html"
+  },
+  {
+    "name": "David Bamman",
+    "position": "Assistant Professor",
+    "email": "dbamman@berkeley.edu",
+    "personal_website": "https://people.ischool.berkeley.edu/~dbamman/",
+    "researchInterests": ["Natural Language Processing", "Digital Humanities", "Machine Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/dbamman.html"
+  },
+  {
+    "name": "Brian A. Barsky",
+    "position": "Professor",
+    "email": "barsky@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~barsky/",
+    "researchInterests": ["Computer Graphics", "Geometric Modeling", "Medical Imaging"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/barsky.html"
+  },
+  {
+    "name": "Peter Bartlett",
+    "position": "Professor",
+    "email": "peter@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~pabbeel/",
+    "researchInterests": ["Machine Learning Theory", "Statistical Learning", "Neural Networks"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/bartlett.html"
+  },
+  {
+    "name": "Alexandre Bayen",
+    "position": "Professor",
+    "email": "bayen@berkeley.edu",
+    "personal_website": "https://bayen.berkeley.edu/",
+    "researchInterests": ["Mobile Sensing", "Control Theory", "Transportation Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/bayen.html"
+  },
+  {
+    "name": "Michael I. Jordan",
+    "position": "Professor of EECS and Statistics",
+    "email": "jordan@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jordan/",
+    "researchInterests": [
+      "Machine Learning",
+      "Statistics",
+      "Artificial Intelligence",
+      "Bayesian Networks",
+      "Variational Methods"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jordan.html"
+  },
+  {
+    "name": "Ion Stoica",
+    "position": "Professor",
+    "email": "istoica@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~istoica/",
+    "researchInterests": [
+      "Distributed Systems",
+      "Cloud Computing",
+      "Networking",
+      "Big Data",
+      "Cluster Computing"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/stoica.html"
+  },
+  {
+    "name": "Raluca Ada Popa",
+    "position": "Associate Professor",
+    "email": "raluca.popa@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~raluca/",
+    "researchInterests": [
+      "Cryptography",
+      "Secure Computing",
+      "Privacy-preserving Systems",
+      "Database Security"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ralucap.html"
+  },
+  {
+    "name": "Trevor Darrell",
+    "position": "Professor",
+    "email": "trevor@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~trevor/",
+    "researchInterests": [
+      "Computer Vision",
+      "Deep Learning",
+      "Multimodal Perception",
+      "Autonomous Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/darrell.html"
+  },
+  {
+    "name": "Johnson Chung",
+    "position": "Lecturer",
+    "email": "johnchung@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Computer Science Education", "Curriculum Development"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/johnchung.html"
+  },
+  {
+    "name": "Jennifer Chayes",
+    "position": "Professor",
+    "email": "jchayes@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": [
+      "Network Science",
+      "Mathematical Modeling",
+      "Machine Learning",
+      "Health Applications"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jchayes.html"
+  },
+  {
+    "name": "Matei Zaharia",
+    "position": "Associate Professor",
+    "email": "matei@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~matei/",
+    "researchInterests": [
+      "Distributed Systems",
+      "Big Data",
+      "Apache Spark",
+      "Cloud Computing",
+      "Datacenter Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/matei.html"
+  },
+  {
+    "name": "Shafi Goldwasser",
+    "position": "Professor",
+    "email": "tmjackson@berkeley.edu",
+    "personal_website": "https://people.csail.mit.edu/shafi/",
+    "researchInterests": [
+      "Cryptography",
+      "Zero-Knowledge Proofs",
+      "Complexity Theory",
+      "Secure Computation"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/goldwasser.html"
+  },
+  {
+    "name": "Manuel Blum",
+    "position": "Professor Emeritus",
+    "email": "blum@cs.berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Computational Complexity", "Cryptography", "Logic in Computer Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/blum.html"
+  },
+  {
+    "name": "Eric Brewer",
+    "position": "Professor",
+    "email": "brewer@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~brewer/",
+    "researchInterests": [
+      "Distributed Systems",
+      "Cloud Computing",
+      "Scalable Web Infrastructure",
+      "CAP Theorem"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/brewer.html"
+  },
+  {
+    "name": "Sarah Chasins",
+    "position": "Assistant Professor",
+    "email": "zhany21@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~schasins/",
+    "researchInterests": [
+      "Programming Languages",
+      "HCI",
+      "End-User Programming",
+      "Program Synthesis"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/schasins.html"
+  },
+  {
+    "name": "Daniel Klein",
+    "position": "Professor",
+    "email": "klein@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~klein/",
+    "researchInterests": [
+      "Natural Language Processing",
+      "Syntax and Semantics",
+      "Machine Learning"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/klein.html"
+  },
+  {
+    "name": "Ken Goldberg",
+    "position": "Professor",
+    "email": "goldberg@berkeley.edu",
+    "personal_website": "https://goldberg.berkeley.edu/",
+    "researchInterests": [
+      "Robotics",
+      "Automation",
+      "AI and Art",
+      "Teleoperation",
+      "Robot Grasping"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/goldberg.html"
+  },
+  {
+    "name": "Jitendra Malik",
+    "position": "Professor",
+    "email": "malik@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~malik/",
+    "researchInterests": ["Computer Vision", "Machine Learning", "Human Visual Perception"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/malik.html"
+  },
+  {
+    "name": "Stuart Russell",
+    "position": "Professor",
+    "email": "russell@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~russell/",
+    "researchInterests": [
+      "Artificial Intelligence",
+      "Probabilistic Reasoning",
+      "Machine Ethics",
+      "Human-Compatible AI"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/russell.html"
+  },
+  {
+    "name": "Scott Shenker",
+    "position": "Professor",
+    "email": "shenker@icsi.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~shenker/",
+    "researchInterests": [
+      "Internet Architecture",
+      "Software-Defined Networking",
+      "Distributed Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/shenker.html"
+  },
+  {
+    "name": "Dawn Song",
+    "position": "Professor",
+    "email": "dawnsong@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~dawnsong/",
+    "researchInterests": ["Security and Privacy", "AI Safety", "Cryptography", "Machine Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/song.html"
+  },
+  {
+    "name": "Alvin Cheung",
+    "position": "Associate Professor",
+    "email": "akcheung@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~akcheung/",
+    "researchInterests": [
+      "Databases",
+      "Programming Languages",
+      "Program Synthesis",
+      "Distributed Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/akcheung.html"
+  },
+  {
+    "name": "Alexei (Alyosha) Efros",
+    "position": "Associate Professor",
+    "email": "efros@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~efros/",
+    "researchInterests": ["Computer Vision", "Graphics", "Machine Learning", "Image Synthesis"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/efros.html"
+  },
+  {
+    "name": "Claire Tomlin",
+    "position": "Professor",
+    "email": "tomlin@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~tomlin/",
+    "researchInterests": [
+      "Control Theory",
+      "Autonomous Systems",
+      "Air Traffic Control",
+      "Cyber-Physical Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/tomlin.html"
+  },
+  {
+    "name": "Edward A. Lee",
+    "position": "Professor Emeritus",
+    "email": "eal@berkeley.edu",
+    "personal_website": "https://ptolemy.berkeley.edu/~eal/",
+    "researchInterests": [
+      "Embedded Systems",
+      "Cyber-Physical Systems",
+      "Modeling and Design",
+      "Real-Time Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/lee.html"
+  },
+  {
+    "name": "Jennifer Listgarten",
+    "position": "Associate Professor",
+    "email": "jennl@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jennl/",
+    "researchInterests": [
+      "Statistical Machine Learning",
+      "Computational Biology",
+      "Biomedical Data Science"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/listgarten.html"
+  },
+  {
+    "name": "Ren Ng",
+    "position": "Associate Professor",
+    "email": "ren@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~renng/",
+    "researchInterests": ["Computational Photography", "Computer Vision", "Light Field Imaging"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yirenng.html"
+  },
+  {
+    "name": "Bin Yu",
+    "position": "Professor",
+    "email": "binyu@stat.berkeley.edu",
+    "personal_website": "https://www.stat.berkeley.edu/~binyu/",
+    "researchInterests": [
+      "Statistics",
+      "Machine Learning",
+      "Artificial Intelligence",
+      "Data Science"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/binyu.html"
+  },
+  {
+    "name": "Avishay Tal",
+    "position": "Assistant Professor",
+    "email": "atal@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~atal/",
+    "researchInterests": [
+      "Computational Complexity",
+      "Boolean Function Analysis",
+      "Pseudorandomness"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/atal.html"
+  },
+  {
+    "name": "Umesh Vazirani",
+    "position": "Professor",
+    "email": "vazirani@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~vazirani/",
+    "researchInterests": [
+      "Quantum Computing",
+      "Computational Complexity",
+      "Theoretical Computer Science"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/vazirani.html"
+  },
+  {
+    "name": "Emma Pierson",
+    "position": "Assistant Professor",
+    "email": "emmapierson@berkeley.edu",
+    "personal_website": "https://cs.stanford.edu/~empierson/",
+    "researchInterests": ["Fairness in ML", "Healthcare AI", "Computational Social Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/emmapierson.html"
+  },
+  {
+    "name": "Koushik Sen",
+    "position": "Professor",
+    "email": "ksen@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~ksen/",
+    "researchInterests": ["Software Testing", "Program Analysis", "Symbolic Execution"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ksen.html"
+  },
+  {
+    "name": "Susan L. Graham",
+    "position": "Professor Emerita",
+    "email": "graham@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~graham/",
+    "researchInterests": ["Programming Languages", "Compilers", "Software Development Tools"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/graham-s.html"
+  },
+  {
+    "name": "Kurt Keutzer",
+    "position": "Professor",
+    "email": "keutzer@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~keutzer/",
+    "researchInterests": [
+      "Deep Learning",
+      "Computer Vision",
+      "Efficient DNN Training",
+      "Hardware Acceleration"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/keutzer.html"
+  },
+  {
+    "name": "Anthony D. Joseph",
+    "position": "Professor",
+    "email": "adj@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~adj/",
+    "researchInterests": ["Computer Security", "Machine Learning Systems", "Networked Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/joseph.html"
+  },
+  {
+    "name": "Aditya Parameswaran",
+    "position": "Associate Professor",
+    "email": "adityagp@eecs.berkeley.edu",
+    "personal_website": "https://adityagp.github.io/",
+    "researchInterests": [
+      "Human-in-the-loop Data Systems",
+      "Data Visualization",
+      "Data Exploration Tools"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/adityagp.html"
+  },
+  {
+    "name": "Nika Haghtalab",
+    "position": "Assistant Professor",
+    "email": "nika@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~nika/",
+    "researchInterests": ["Machine Learning Theory", "Algorithmic Fairness", "Online Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/nika.html"
+  },
+  {
+    "name": "John D. Kubiatowicz",
+    "position": "Professor",
+    "email": "kubitron@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~kubitron/",
+    "researchInterests": ["Operating Systems", "Distributed Systems", "Quantum Computing"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/kubiatowicz.html"
+  },
+  {
+    "name": "James Demmel",
+    "position": "Professor",
+    "email": "demmel@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~demmel/",
+    "researchInterests": ["Numerical Linear Algebra", "High-Performance Computing", "Algorithms"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/demmel.html"
+  },
+  {
+    "name": "Joshua Hug",
+    "position": "Lecturer",
+    "email": "hug@cs.berkeley.edu",
+    "personal_website": "https://cs61b.org/hug/",
+    "researchInterests": ["Computer Science Education", "Data Structures", "Algorithms"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/joshhug.html"
+  },
+  {
+    "name": "Satish Rao",
+    "position": "Professor",
+    "email": "satishr@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~satishr/",
+    "researchInterests": ["Algorithms", "Graph Theory", "Network Design"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/rao.html"
+  },
+  {
+    "name": "Sylvia Ratnasamy",
+    "position": "Associate Professor",
+    "email": "sylvia@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~sylvia/",
+    "researchInterests": ["Networking", "Distributed Systems", "Programmable Networks"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ratnasamy.html"
+  },
+  {
+    "name": "Ali Ghodsi",
+    "position": "Adjunct Professor",
+    "email": "aligh@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~alig/",
+    "researchInterests": ["Big Data", "Machine Learning Systems", "Distributed Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/aligh.html"
+  },
+  {
+    "name": "Joseph M. Hellerstein",
+    "position": "Professor",
+    "email": "hellerstein@berkeley.edu",
+    "personal_website": "https://dsf.berkeley.edu/jmh/",
+    "researchInterests": ["Databases", "Data Systems", "Distributed Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/hellerstein.html"
+  },
+  {
+    "name": "David A. Patterson",
+    "position": "Professor Emeritus",
+    "email": "pattrsn@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~pattrsn/",
+    "researchInterests": ["Computer Architecture", "RISC", "Storage Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/patterson.html"
+  },
+  {
+    "name": "Moritz Hardt",
+    "position": "Assistant Professor",
+    "email": "hardt@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~hardt/",
+    "researchInterests": ["Fairness in Machine Learning", "Data Privacy", "Learning Theory"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/mhardt.html"
+  },
+  {
+    "name": "Kannan Ramchandran",
+    "position": "Professor",
+    "email": "kannanr@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~kannanr/",
+    "researchInterests": [
+      "Information Theory",
+      "Signal Processing",
+      "Machine Learning",
+      "Coding for Distributed Storage"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ramchandran.html"
+  },
+  {
+    "name": "Jacob Steinhardt",
+    "position": "Assistant Professor",
+    "email": "jsteinhardt@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jsteinhardt/",
+    "researchInterests": ["Robust Machine Learning", "Fairness", "AI Alignment"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jsteinhardt.html"
+  },
+  {
+    "name": "Prabal Dutta",
+    "position": "Associate Professor",
+    "email": "prabal@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~prabal/",
+    "researchInterests": [
+      "Embedded Systems",
+      "Internet of Things",
+      "Sensor Networks",
+      "Energy-Efficient Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/prabal.html"
+  },
+  {
+    "name": "Katherine A. Yelick",
+    "position": "Professor",
+    "email": "yelick@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~yelick/",
+    "researchInterests": [
+      "High Performance Computing",
+      "Parallel Programming Models",
+      "Compiler Design"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yelick.html"
+  },
+  {
+    "name": "Lawrence A. Rowe",
+    "position": "Professor Emeritus",
+    "email": "noemail@eecs.berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Multimedia Systems", "Databases", "Digital Video"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/rowe.html"
+  },
+  {
+    "name": "Jonathan Shewchuk",
+    "position": "Professor",
+    "email": "jrs@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jrs/",
+    "researchInterests": ["Scientific Computing", "Mesh Generation", "Numerical Analysis"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/shewchuk.html"
+  },
+  {
+    "name": "Jelani Nelson",
+    "position": "Associate Professor",
+    "email": "minilek@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~minilek/",
+    "researchInterests": ["Streaming Algorithms", "Sketching", "Theoretical Computer Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/minilek.html"
+  },
+  {
+    "name": "Anca Dragan",
+    "position": "Associate Professor",
+    "email": "anca@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~anca/",
+    "researchInterests": ["Human-Robot Interaction", "Robotics", "Machine Learning", "AI Safety"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/anca.html"
+  },
+  {
+    "name": "Sanjit A. Seshia",
+    "position": "Professor",
+    "email": "sseshia@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~sseshia/",
+    "researchInterests": [
+      "Formal Methods",
+      "Cyber-Physical Systems",
+      "Machine Learning for Verification"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/seshia.html"
+  },
+  {
+    "name": "Alessandro Chiesa",
+    "position": "Assistant Professor",
+    "email": "alexch@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~alexch/",
+    "researchInterests": ["Cryptography", "Zero-Knowledge Proofs", "Blockchain Security"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/alexch.html"
+  },
+  {
+    "name": "Laura Waller",
+    "position": "Associate Professor",
+    "email": "waller@berkeley.edu",
+    "personal_website": "https://www.laurawaller.com/",
+    "researchInterests": ["Computational Imaging", "Microscopy", "Optics"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/waller.html"
+  },
+  {
+    "name": "James O'Brien",
+    "position": "Professor",
+    "email": "job@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~job/",
+    "researchInterests": ["Computer Graphics", "Animation", "Physics-Based Simulation"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/obrien.html"
+  },
+  {
+    "name": "Igor Mordatch",
+    "position": "Assistant Professor",
+    "email": "mordatch@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~mordatch/",
+    "researchInterests": ["AI", "Multi-Agent Systems", "Physics-Based Simulation"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/mordatch.html"
+  },
+  {
+    "name": "David Wagner",
+    "position": "Professor",
+    "email": "daw@cs.berkeley.edu",
+    "personal_website": "https://www.cs.berkeley.edu/~daw/",
+    "researchInterests": ["Computer Security", "Cryptography", "Privacy"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/wagner.html"
+  },
+  {
+    "name": "Kristofer Pister",
+    "position": "Professor",
+    "email": "ksjp@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~pister/",
+    "researchInterests": ["Microsystems", "Sensor Networks", "MEMS", "Smart Dust"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/pister.html"
+  },
+  {
+    "name": "Bernd Sturmfels",
+    "position": "Professor",
+    "email": "no_email@eecs.berkeley.edu",
+    "personal_website": "https://math.berkeley.edu/~bernd/",
+    "researchInterests": ["Algebraic Geometry", "Combinatorics", "Mathematical Data Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/sturmfels.html"
+  },
+  {
+    "name": "Randy H. Katz",
+    "position": "Professor",
+    "email": "randy@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~randy/",
+    "researchInterests": ["Computer Architecture", "Cloud Systems", "Wireless Networking"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/katz.html"
+  },
+  {
+    "name": "Paul N. Hilfinger",
+    "position": "Teaching Professor",
+    "email": "hilfingr@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~hilfingr/",
+    "researchInterests": ["Programming Languages", "Compiler Construction", "CS Education"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/hilfinger.html"
+  },
+  {
+    "name": "Niloufar Salehi",
+    "position": "Assistant Professor",
+    "email": "nsalehi@berkeley.edu",
+    "personal_website": "https://www.niloufar.salehi.io/",
+    "researchInterests": ["HCI", "Social Computing", "Ethics in AI"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/nsalehi.html"
+  },
+  {
+    "name": "Lisa Yan",
+    "position": "Assistant Teaching Professor",
+    "email": "yanlisa@berkeley.edu",
+    "personal_website": "https://cs.stanford.edu/~lyan/",
+    "researchInterests": [
+      "Computer Science Education",
+      "Pedagogy in Programming",
+      "Equity in STEM"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yanlisa.html"
+  },
+  {
+    "name": "Max Willsey",
+    "position": "Assistant Professor",
+    "email": "mwillsey@berkeley.edu",
+    "personal_website": "https://willsey.io/",
+    "researchInterests": ["Programming Languages", "Program Synthesis", "PL Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/mwillsey.html"
+  },
+  {
+    "name": "Jean Walrand",
+    "position": "Professor",
+    "email": "wlr@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~walrand/",
+    "researchInterests": ["Network Economics", "Queueing Theory", "Stochastic Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/walrand.html"
+  },
+  {
+    "name": "Allon Wagner",
+    "position": "Assistant Professor",
+    "email": "allonwag@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~allonwag/",
+    "researchInterests": ["Computational Biology", "Machine Learning", "Biomedical Data Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/allonwag.html"
+  },
+  {
+    "name": "Alane Suhr",
+    "position": "Assistant Professor",
+    "email": "suhr@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~suhr/",
+    "researchInterests": [
+      "Natural Language Processing",
+      "Grounded Language",
+      "Human-AI Interaction"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/suhr.html"
+  },
+  {
+    "name": "John Wawrzynek",
+    "position": "Professor",
+    "email": "johnw@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~johnw/",
+    "researchInterests": ["Computer Architecture", "Reconfigurable Computing", "Digital Audio"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/wawrzynek.html"
+  },
+  {
+    "name": "Jonathan Stray",
+    "position": "Assistant Professor",
+    "email": "jonathanstray@berkeley.edu",
+    "personal_website": "https://stray.com/",
+    "researchInterests": [
+      "AI and Journalism",
+      "Human-AI Collaboration",
+      "Fairness and Transparency"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jstray.html"
+  },
+  {
+    "name": "Carlo H. Séquin",
+    "position": "Professor Emeritus",
+    "email": "sequin@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~sequin/",
+    "researchInterests": ["Computer Graphics", "Geometric Modeling", "Art & Geometry"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/sequin.html"
+  },
+  {
+    "name": "Domenico Ferrari",
+    "position": "Professor Emeritus",
+    "email": "Unavailable",
+    "personal_website": "",
+    "researchInterests": ["Quality of Service", "Network Protocols", "Distributed Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ferrari.html"
+  },
+  {
+    "name": "Michael Stonebraker",
+    "position": "Adjunct Professor",
+    "email": "mike@cs.berkeley.edu",
+    "personal_website": "https://people.csail.mit.edu/stonebraker/",
+    "researchInterests": ["Database Systems", "Data Integration", "Stream Processing"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/stonebraker.html"
+  },
+  {
+    "name": "Nir Yosef",
+    "position": "Associate Professor",
+    "email": "niryosef@eecs.berkeley.edu",
+    "personal_website": "https://www.yoseflab.org/",
+    "researchInterests": ["Computational Biology", "Single-cell Genomics", "Gene Regulation"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/niryosef.html"
+  },
+  {
+    "name": "Adam Yala",
+    "position": "Assistant Professor",
+    "email": "yala@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~yala/",
+    "researchInterests": ["ML in Healthcare", "Medical Imaging", "Causal Inference"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yala.html"
+  },
+  {
+    "name": "Anant Sahai",
+    "position": "Professor",
+    "email": "sahai@eecs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~sahai/",
+    "researchInterests": ["Information Theory", "Wireless Communication", "Control over Networks"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/sahai.html"
+  },
+  {
+    "name": "Yun S. Song",
+    "position": "Professor",
+    "email": "yss@berkeley.edu",
+    "personal_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yssong.html",
+    "researchInterests": ["Computational Biology", "Population Genetics", "Statistical Genomics"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/yssong.html"
+  },
+  {
+    "name": "Sanjam Garg",
+    "position": "Associate Professor",
+    "email": "sanjamg@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~sanjamg/",
+    "researchInterests": ["Cryptography", "Secure Computation", "Foundations of Security"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/sanjam.html"
+  },
+  {
+    "name": "David E. Culler",
+    "position": "Professor",
+    "email": "culler@berkeley.edu",
+    "personal_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/culler.html",
+    "researchInterests": ["Embedded Systems", "Wireless Sensor Networks", "Computer Architecture"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/culler.html"
+  },
+  {
+    "name": "Christian Borgs",
+    "position": "Professor",
+    "email": "borgs@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~cborgs/",
+    "researchInterests": ["Algorithmic Game Theory", "Probability Theory", "Network Science"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/borgs.html"
+  },
+  {
+    "name": "Armando Fox",
+    "position": "Professor",
+    "email": "fox@berkeley.edu",
+    "personal_website": "http://armandofox.com/",
+    "researchInterests": ["Cloud Computing", "Software Engineering", "CS Education"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/fox.html"
+  },
+  {
+    "name": "Phillip Colella",
+    "position": "Professor Emeritus",
+    "email": "pcolella@lbl.gov",
+    "personal_website": "",
+    "researchInterests": ["Computational Physics", "Numerical Methods", "Adaptive Mesh Refinement"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/colella.html"
+  },
+  {
+    "name": "Jack Gallant",
+    "position": "Professor",
+    "email": "gallant@berkeley.edu",
+    "personal_website": "https://gallantlab.org/",
+    "researchInterests": ["Computational Neuroscience", "fMRI Analysis", "Visual Perception"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/gallant.html"
+  },
+  {
+    "name": "Dan Garcia",
+    "position": "Teaching Professor",
+    "email": "ddgarcia@cs.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~ddgarcia/",
+    "researchInterests": [
+      "Computer Science Education",
+      "Game Design",
+      "Outreach & Diversity in CS"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/garcia.html"
+  },
+  {
+    "name": "Richard M. Karp",
+    "position": "Professor Emeritus",
+    "email": "karp@cs.berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Combinatorial Algorithms", "Computational Complexity", "Bioinformatics"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/karp.html"
+  },
+  {
+    "name": "John F. Canny",
+    "position": "Professor",
+    "email": "canny@berkeley.edu",
+    "personal_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/canny.html",
+    "researchInterests": ["Human-Computer Interaction", "Ubiquitous Computing", "Machine Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/canny.html"
+  },
+  {
+    "name": "Marti Hearst",
+    "position": "Professor",
+    "email": "hearst@berkeley.edu",
+    "personal_website": "https://people.ischool.berkeley.edu/~hearst/",
+    "researchInterests": [
+      "Information Visualization",
+      "Search Interfaces",
+      "Computational Linguistics"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/hearst.html"
+  },
+  {
+    "name": "Sergey Levine",
+    "position": "Assistant Professor",
+    "email": "fvasquez@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~svlevine/",
+    "researchInterests": ["Robotics", "Reinforcement Learning", "Deep Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/svlevine.html"
+  },
+  {
+    "name": "Oliver Grillmeyer",
+    "position": "Lecturer",
+    "email": "topramen@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Software Engineering", "Education", "Programming Methodologies"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/ogrillmeyer.html"
+  },
+  {
+    "name": "Christopher Fletcher",
+    "position": "Associate Professor",
+    "email": "cwfletcher@berkeley.edu",
+    "personal_website": "https://fletch.io/",
+    "researchInterests": ["Computer Architecture", "Security", "Side-Channel Attacks"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/cwfletcher.html"
+  },
+  {
+    "name": "Björn Hartmann",
+    "position": "Associate Professor",
+    "email": "bjoern@eecs.berkeley.edu",
+    "personal_website": "http://bjoern.org/",
+    "researchInterests": ["Human-Computer Interaction", "Design Tools", "Crowdsourcing"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/hartmann.html"
+  },
+  {
+    "name": "Michael Lustig",
+    "position": "Professor",
+    "email": "mikilustig@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~mlustig/",
+    "researchInterests": ["Medical Imaging", "MRI", "Compressed Sensing"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/mlustig.html"
+  },
+  {
+    "name": "Nilah Ioannidis",
+    "position": "Assistant Professor",
+    "email": "nilah@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Genomics", "Computational Biology", "Statistical Modeling"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/nilah.html"
+  },
+  {
+    "name": "Jiantao Jiao",
+    "position": "Assistant Professor",
+    "email": "kail@erso.berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jiantao/",
+    "researchInterests": ["Information Theory", "Statistics", "Machine Learning"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jiantao.html"
+  },
+  {
+    "name": "Lakshya Jain",
+    "position": "Lecturer",
+    "email": "lakshya.jain@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["CS Education", "Security", "Systems"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/lakshyajain.html"
+  },
+  {
+    "name": "Justin Yokota",
+    "position": "Lecturer",
+    "email": "jyokota@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Algorithms", "Discrete Math", "CS Education"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jyokota.html"
+  },
+  {
+    "name": "Christopher Hunn",
+    "position": "Lecturer",
+    "email": "cthunn@eecs.berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["Operating Systems", "Computer Architecture", "Security"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/cthunn.html"
+  },
+  {
+    "name": "Peyrin Kao",
+    "position": "Lecturer",
+    "email": "peyrin@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": ["CS Education", "Data Structures", "Programming Languages"],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/peyrin.html"
+  },
+  {
+    "name": "Serina Chang",
+    "position": "Assistant Professor",
+    "email": "serinac@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": [
+      "Natural Language Processing",
+      "Machine Learning",
+      "Computational Social Science"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/serinac.html"
+  },
+  {
+    "name": "Costas J. Spanos",
+    "position": "Professor",
+    "email": "eva.leach@berkeley.edu",
+    "personal_website": "",
+    "researchInterests": [
+      "Cyber-Physical Systems",
+      "Semiconductor Manufacturing",
+      "AI for Smart Buildings"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/spanos.html"
+  },
+  {
+    "name": "Jaijeet Roychowdhury",
+    "position": "Professor",
+    "email": "jr@berkeley.edu",
+    "personal_website": "https://people.eecs.berkeley.edu/~jr/",
+    "researchInterests": [
+      "Analog and Mixed-Signal Design",
+      "Computational Electronics",
+      "Neuromorphic Systems"
+    ],
+    "college_website": "https://www2.eecs.berkeley.edu/Faculty/Homepages/jr.html"
+  }
+]

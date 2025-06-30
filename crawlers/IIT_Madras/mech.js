@@ -1,9 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const collegeService = require('../../modules/colleges/services');
-const professorsService = require('../../modules/professors/services');
+const collegeService = require('../../src/modules/colleges/services');
+const professorsService = require('../../src/modules/professors/services');
 const utils = require('../utils');
-const logger = require('../../config/logger');
+const logger = require('../../src/config/logger');
 
 const baseUrl = 'https://mech.iitm.ac.in/';
 const targetUrl = baseUrl + 'faculty.php';
@@ -82,6 +82,22 @@ async function scrapeProfilesMech() {
             .join('; ');
         }
 
+        // Biography (if no research area)
+        if (researchInterests == 'Unavailable') {
+          const biographyHeader = $('button span')
+            .filter((_, el) => $(el).text().trim().toLowerCase().includes('biography'))
+            .closest('button');
+
+          if (biographyHeader.length) {
+            const parent = biographyHeader.closest('.accordion-item');
+            researchInterests = parent
+              .find('.accordion-body li')
+              .map((_, el) => $(el).text().trim())
+              .get()
+              .join('; ');
+          }
+        }
+
         return {
           name,
           designation,
@@ -98,10 +114,12 @@ async function scrapeProfilesMech() {
     let results = [];
 
     for (const link of facultyLinks) {
-      const profile = await scrapeProfile(link);
-      if (profile) results.push(profile);
+      const data = await scrapeProfile(link);
+      if (data) {
+        results.push({ ...data, college_website: link });
+      }
     }
-
+    logger.info(`Number of professors: ${results.length}`);
     return results;
   } catch (err) {
     logger.error('Error fetching page:', err.message);
@@ -127,6 +145,7 @@ async function insertInDB() {
         researchInterests: [prof.researchInterests.trim()],
         personal_website: prof.personalWebsite,
         position: prof.designation,
+        college_website: prof.college_website,
       };
       const createdProf = await professorsService.createProfessor(prof_data);
       logger.info(`Created: ${createdProf.name}`);
