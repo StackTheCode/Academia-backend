@@ -11,29 +11,35 @@ on:
       - dev
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
+    environment: ci_testing
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Load Secrets to ENV File
+    - name: Load Secrets to .env File
       run: |
-        touch .env
-        echo "${{ secrets.TEST_SECRETS }}" >> .env
+        echo "$CI_SECRETS" > .env
+      env:
+        CI_SECRETS: ${{ secrets.CI_SECRETS }}    
 
     - name: Check ENV File 
       uses: falti/dotenv-action@v1
 
-    - name: Read ENV File
+    - name: create Keyfile for replicaset
       run: |
-        cat .env
+        chmod +x keyfile.sh
+        ./keyfile.sh
 
-    - name: Build the Docker Image
-      run: docker compose up --build -d
+    - name: Build and Start Docker Containers
+      run: docker compose --env-file .env up --build -d
 
-    - name: Test MongoDB Connection
-      run: docker compose exec -T mongo mongosh --eval "db.adminCommand('ping')"
+    - name: Wait for MongoDB to be ready
+      run: |
+        echo "Waiting for MongoDB to be ready..."
+        for i in {1..10}; do
+          docker compose exec -T mongo mongosh --eval "db.adminCommand('ping')" && break
+          sleep 3
+        done

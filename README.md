@@ -40,7 +40,7 @@ chmod +x keyfile.sh
 `docker compose up`
 
 ### Run Crawlers
-`
- docker exec -it academia-backend-server-1 bash
- node crawlers/{COLLEGE-NAME}/{DEPARTMENT}.js
- `
+```
+docker exec -it academia-backend-server-1 bash
+node crawlers/{COLLEGE-NAME}/{DEPARTMENT}.js
+```
