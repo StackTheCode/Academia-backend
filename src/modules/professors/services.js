@@ -1,5 +1,6 @@
 const Professor = require('./models');
 const typesenseClient = require('../../config/typesense');
+const logger = require('../../config/logger');
 
 exports.getAllProfessors = async (filters) => {
   const filterParts = [];
@@ -41,7 +42,7 @@ exports.getAllProfessors = async (filters) => {
       per_page,
     };
   } catch (err) {
-    console.error('❌ Typesense search failed:', err.message);
+    logger.error('❌ Typesense search failed:', err.message);
     return { professors: [], total: 0, page, per_page };
   }
 };

@@ -1,5 +1,6 @@
 const userService = require('./services');
 const fs = require('fs');
+const logger = require('../../config/logger');
 
 // GET /api/auth
 exports.getAllUsers = async (req, res) => {
@@ -28,7 +29,7 @@ exports.updateUser = async (req, res) => {
     const updated = await userService.updateUser(req.user.id, req.body);
     res.json(updated);
   } catch (err) {
-    console.error('Update error:', err.message);
+    logger.error('Update error:', err.message);
     res.status(400).json({ error: err.message });
   }
 };
@@ -36,7 +37,7 @@ exports.updateUser = async (req, res) => {
 // DELETE /api/auth
 exports.deleteUser = async (req, res) => {
   try {
-    console.log(req.user);
+    logger.info('User to be deleted:', req.user);
     await userService.deleteUser(req.user.id);
     res.status(204).end();
   } catch (err) {
@@ -47,14 +48,14 @@ exports.deleteUser = async (req, res) => {
 // GET /api/auth/files
 exports.getAllFiles = async (req, res) => {
   try {
-    console.log(req.user.id);
+    logger.info('User requesting to get all files:', req.user.id);
     const uploadedFiles = await userService.getAllFiles(req.user.id);
     return res.status(200).json({ uploadedFiles });
   } catch (err) {
     if (err.message === 'User not found') {
       return res.status(404).json({ error: err.message });
     }
-    console.error('Unexpected error in getAllFiles:', err);
+    logger.error('Unexpected error in getAllFiles:', err);
     return res.status(500).json({ error: 'Failed to fetch files' });
   }
 };
@@ -69,7 +70,7 @@ exports.createFile = async (req, res) => {
     await userService.createFile(req.file, req.user.id);
     res.status(201).json({ message: 'File uploaded successfully' });
   } catch (err) {
-    console.error('Upload error:', err);
+    logger.error('Upload error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

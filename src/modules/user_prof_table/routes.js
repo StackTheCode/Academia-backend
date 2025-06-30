@@ -75,6 +75,8 @@ router.get('/:id', authenticateJWT, userProfController.getUserProfEntryById);
  *     responses:
  *       200:
  *         description: Entries retrieved successfully
+ *       404:
+ *         description: Entries not found
  */
 router.get('/user/batch', authenticateJWT, userProfController.getUserProfEntriesByUserId);
 
@@ -95,6 +97,8 @@ router.get('/user/batch', authenticateJWT, userProfController.getUserProfEntries
  *     responses:
  *       200:
  *         description: Entries retrieved successfully
+ *       404:
+ *         description: Entries not found
  */
 router.get(
   '/professor/:professorId',

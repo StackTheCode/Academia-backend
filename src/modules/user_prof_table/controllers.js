@@ -1,4 +1,5 @@
 const userProfService = require('./services');
+const logger = require('../../config/logger');
 
 exports.getAllUserProfEntries = async (req, res) => {
   try {
@@ -31,6 +32,8 @@ exports.getUserProfEntryById = async (req, res) => {
 exports.getUserProfEntriesByUserId = async (req, res) => {
   try {
     const entries = await userProfService.getUserProfEntriesByUserId(req.user.id);
+    if (!entries || entries.length === 0)
+      return res.status(404).json({ error: 'Entries not found' });
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch user entries' });
@@ -40,6 +43,8 @@ exports.getUserProfEntriesByUserId = async (req, res) => {
 exports.getUserProfEntriesByProfessorId = async (req, res) => {
   try {
     const entries = await userProfService.getUserProfEntriesByProfessorId(req.params.professorId);
+    if (!entries || entries.length === 0)
+      return res.status(404).json({ error: 'Entries not found' });
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch professor entries' });
@@ -85,7 +90,7 @@ exports.insertBatchEntry = async (req, res) => {
       res.status(200).json({ message: 'No new entries to insert.' });
     }
   } catch (err) {
-    console.error(err);
+    logger.error('Failed to insert batch entry', err);
     res.status(500).json({ error: 'Failed to insert batch entries' });
   }
 };

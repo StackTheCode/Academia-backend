@@ -1,6 +1,7 @@
 const Professor = require('../modules/professors/models');
 const Synonym = require('../modules/synonyms/models');
 const typesenseClient = require('../config/typesense');
+const logger = require('../config/logger');
 
 async function startProfessorChangeStream() {
   const changeStream = Professor.watch([], { fullDocument: 'updateLookup' });
@@ -23,26 +24,26 @@ async function startProfessorChangeStream() {
             personal_website: doc.personal_website || '',
           };
           await typesenseClient.collections('professors').documents().upsert(typesenseDoc);
-          console.log(`[Typesense] ${change.operationType}d professor: ${doc.name}`);
+          logger.info(`[Typesense] ${change.operationType}d professor: ${doc.name}`);
           break;
         }
 
         case 'delete': {
           const id = change.documentKey._id.toString();
           await typesenseClient.collections('professors').documents(id).delete();
-          console.log(`[Typesense] Deleted professor with ID: ${id}`);
+          logger.info(`[Typesense] Deleted professor with ID: ${id}`);
           break;
         }
 
         default:
-          console.log(`[Typesense] Skipped operation: ${change.operationType}`);
+          logger.info(`[Typesense] Skipped operation: ${change.operationType}`);
       }
     } catch (err) {
-      console.error('[Typesense Sync Error]', err.message);
+      logger.error('[Typesense Sync Error]', err.message);
     }
   });
 
-  console.log('🔁 Started MongoDB Change Stream for Professors.');
+  logger.info('🔁 Started MongoDB Change Stream for Professors.');
 }
 
 async function startSynonymChangeStream() {
@@ -60,31 +61,31 @@ async function startSynonymChangeStream() {
             await typesenseClient.collections('professors').synonyms().upsert(id, {
               synonyms: doc.synonyms,
             });
-            console.log(`[Typesense] Upserted synonym: ${id}`);
+            logger.info(`[Typesense] Upserted synonym: ${id}`);
           } else {
             try {
               await typesenseClient.collections('professors').synonyms(id).delete();
-              console.log(`[Typesense] Deleted synonym (marked inactive): ${id}`);
+              logger.info(`[Typesense] Deleted synonym (marked inactive): ${id}`);
             } catch (e) {
-              console.log(`[Typesense] Synonym "${id}" not found for deletion.`);
+              logger.info(`[Typesense] Synonym "${id}" not found for deletion.`);
             }
           }
           break;
 
         case 'delete':
           await typesenseClient.collections('professors').synonyms(id).delete();
-          console.log(`[Typesense] Deleted synonym: ${id}`);
+          logger.info(`[Typesense] Deleted synonym: ${id}`);
           break;
 
         default:
-          console.log(`[Typesense] Skipped operation: ${change.operationType}`);
+          logger.info(`[Typesense] Skipped operation: ${change.operationType}`);
       }
     } catch (err) {
-      console.error('[Typesense Sync Error - Synonym]', err.message);
+      logger.error('[Typesense Sync Error - Synonym]', err.message);
     }
   });
 
-  console.log('🔁 Started MongoDB Change Stream for Synonyms.');
+  logger.info('🔁 Started MongoDB Change Stream for Synonyms.');
 }
 
 async function initSynonyms() {
@@ -96,7 +97,7 @@ async function initSynonyms() {
         // Check if it already exists in Typesense
         await typesenseClient.collections('professors').synonyms(synonym.name).retrieve();
 
-        console.log(`ℹ️ Synonym "${synonym.name}" already exists in Typesense, skipping...`);
+        logger.info(`ℹ️ Synonym "${synonym.name}" already exists in Typesense, skipping...`);
       } catch (err) {
         if (err.message?.includes('404')) {
           // Does not exist, so insert it
@@ -104,14 +105,14 @@ async function initSynonyms() {
             synonyms: synonym.synonyms,
           });
 
-          console.log(`✅ Synonym "${synonym.name}" inserted into Typesense`);
+          logger.info(`✅ Synonym "${synonym.name}" inserted into Typesense`);
         } else {
-          console.error(`❌ Error checking synonym "${synonym.name}":`, err.message);
+          logger.error(`❌ Error checking synonym "${synonym.name}":`, err.message);
         }
       }
     }
   } catch (err) {
-    console.error('❌ Error initializing synonyms from DB:', err.message);
+    logger.error('❌ Error initializing synonyms from DB:', err.message);
   }
 }
 
