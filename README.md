@@ -74,10 +74,6 @@ Academia is a platform designed to simplify the process of finding and connectin
 
 `npm run dev`
 
-## 📝 Note:
-
-To access the swagger documentation, set NODE_ENV=DEV and check localhost:{PORT}/api-docs in your browser
-
 ## 🐳 Docker Setup
 
 ### Give permission to the keyfile script and execute
@@ -96,3 +92,19 @@ chmod +x keyfile.sh
 docker exec -it academia-backend-server-1 bash
 node crawlers/{COLLEGE-NAME}/{DEPARTMENT}.js
 ```
+
+## ⚡AWS Lambda Usage
+AWS Lambda is used to manage the summarization of research papers uploaded to an S3 bucket.
+
+An API Gateway triggers the first Lambda function, which checks DynamoDB for an existing summary. If not found, it checks the Summary Status table. If there's no pending entry, it adds one and sends a message to SQS.
+
+SQS triggers the second Lambda function, which uses Amazon Textract to extract text from the PDF and sends it to the Hugging Face API (Facebook’s BART model) for summarization. The result is saved to DynamoDB, and the status is updated to completed.
+
+## 📝 Note:
+
+To access the swagger documentation, set `NODE_ENV=DEV` and check `localhost:{PORT}/api-docs` on your browser
+
+## 🔗 Link to Frontend Repository
+
+[Academia Frontend Repository](https://github.com/RithvikR1218/Academia-frontend)
+
