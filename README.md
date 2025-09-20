@@ -94,11 +94,11 @@ node crawlers/{COLLEGE-NAME}/{DEPARTMENT}.js
 ```
 
 ## ⚡AWS Lambda Usage
-AWS Lambda is used to manage the summarization of research papers uploaded to an S3 bucket.
+AWS Lambda handles research paper summarization from S3 uploads.
 
-An API Gateway triggers the first Lambda function, which checks DynamoDB for an existing summary. If not found, it checks the Summary Status table. If there's no pending entry, it adds one and sends a message to SQS.
+An API Gateway triggers the first Lambda, which checks DynamoDB for an existing summary. If none exists and no pending entry is found in the Summary Status table, it adds one and sends a message to SQS.
 
-SQS triggers the second Lambda function, which uses Amazon Textract to extract text from the PDF and sends it to the Hugging Face API (Facebook’s BART model) for summarization. The result is saved to DynamoDB, and the status is updated to completed.
+SQS then triggers a second Lambda, which uses Amazon Textract to extract PDF text and passes it to the Hugging Face BART model for summarization. The result is stored in DynamoDB, and the status is updated to completed.
 
 ## 📝 Note:
 
